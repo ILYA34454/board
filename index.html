@@ -338,10 +338,10 @@
             </div>
         </div>
         <div id="deptView">
-            <h2 class="section-title" id="regionsTitle">Регионы-лидеры продаж</h2>
-            <div class="regions-grid" id="regionsGrid"></div>
             <h2 class="section-title">Лучшие в номинациях</h2>
             <div class="cards-grid fade-in" id="cardsGrid"></div>
+            <h2 class="section-title" id="regionsTitle">Регионы-лидеры продаж</h2>
+            <div class="regions-grid" id="regionsGrid"></div>
         </div>
         <div id="overallView" style="display:none;">
             <div style="display:flex;align-items:center;gap:20px;margin-bottom:32px;">
@@ -513,8 +513,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     let regions=loadRegions();
 
     const defaultNomTitles={
-        commercial:["Директор-лидер по объему продаж","Маржинальность","Объем продаж","Продажа дополнительных услуг"],
+        commercial:["Лидер по марже среди сотрудников","Лидер по марже среди директоров","Лидер по объёму среди сотрудников","Лидер по объёму среди директоров"],
         security:["Лучший аналитик рисков","Предотвращение потерь","Скорость реагирования","Качество отчетности"]
+    };
+    const nomIcons={
+        commercial:["https://i.ibb.co/tp3G6WF8/Procent-1.png","https://i.ibb.co/QFmmMpZR/Card-1.png","https://i.ibb.co/HLVqSPSK/Star-1.png","https://i.ibb.co/tpjfTCbN/Plus-1.png"],
+        security:["https://i.ibb.co/HLVqSPSK/Star-1.png","https://i.ibb.co/tpjfTCbN/Plus-1.png","https://i.ibb.co/tp3G6WF8/Procent-1.png","https://i.ibb.co/QFmmMpZR/Card-1.png"]
     };
     const defaultNominees={commercial:{
         0:[{name:"Абдумалиева Фарангиз",position:"Директор по продажам",value:"21 231 000 ₽",img:"https://randomuser.me/api/portraits/women/44.jpg"},{name:"Смазливенький Антон",position:"Старший менеджер",value:"18 740 000 ₽",img:"https://randomuser.me/api/portraits/men/32.jpg"},{name:"Успехов Александр",position:"Менеджер по продажам",value:"16 520 000 ₽",img:"https://randomuser.me/api/portraits/men/46.jpg"}],
@@ -533,7 +537,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     function sr(seed){let x=Math.sin(seed)*10000;return x-Math.floor(x);}
     const mN=["Иванов Алексей","Сидоров Максим","Попов Дмитрий","Васильев Николай","Михайлов Артём","Степанов Роман","Кузьмин Андрей","Щербаков Даниил","Жуков Владимир","Фролов Егор","Баранов Кирилл","Медведев Тимур","Комаров Виталий","Зайцев Денис","Ершов Олег","Лазарев Иван","Савельев Марк","Орехов Глеб","Панов Матвей","Рябов Никита"];
     const fN=["Иванова Мария","Сидорова Анна","Попова Елена","Васильева Софья","Михайлова Алиса","Степанова Полина","Кузьмина Виктория","Щербакова Дарья","Жукова Екатерина","Фролова Арина","Баранова Ксения","Медведева Надежда","Комарова Ульяна","Зайцева Вероника","Ершова Лидия","Лазарева Ирина","Савельева Юлия","Орехова Диана","Панова Милана","Рябова Таисия"];
-    const dCfg={commercial:{pos:["Директор по продажам","Старший менеджер","Менеджер по продажам","Руководитель отдела","Ведущий менеджер"],t:["Директор-лидер по объему продаж","Маржинальность","Объем продаж","Продажа дополнительных услуг"],v:["money","percent","money","money"]},security:{pos:["Руководитель СБ","Аналитик рисков","Старший специалист","Специалист по проверкам","Инспектор"],t:["Лучший аналитик рисков","Предотвращение потерь","Скорость реагирования","Качество отчетности"],v:["checks","money","time","percent"]}};
+    const dCfg={commercial:{pos:["Директор по продажам","Старший менеджер","Менеджер по продажам","Руководитель отдела","Ведущий менеджер"],t:["Лидер по марже среди сотрудников","Лидер по марже среди директоров","Лидер по объёму среди сотрудников","Лидер по объёму среди директоров"],v:["percent","percent","money","money"]},security:{pos:["Руководитель СБ","Аналитик рисков","Старший специалист","Специалист по проверкам","Инспектор"],t:["Лучший аналитик рисков","Предотвращение потерь","Скорость реагирования","Качество отчетности"],v:["checks","money","time","percent"]}};
     function genVal(type,seed,rank){let b=sr(seed);switch(type){case'money':return((Math.floor(b*20)+5)-rank*3)+' '+(Math.floor(sr(seed+99)*9)+1)+'00 000 ₽';case'percent':return(95-rank*7-Math.floor(b*5))+'%';case'time':return(0.8+rank*0.5+b*0.3).toFixed(1)+' ч.';case'checks':return(48-rank*8-Math.floor(b*5))+' проверок';default:return'—';}}
     function buildGenerated(key){const c=dCfg[key];if(!c)return null;const seed=key.split('').reduce((a,ch)=>a+ch.charCodeAt(0),0);return c.t.map((title,ci)=>{const noms=[];for(let ni=0;ni<3;ni++){const s=seed+ci*17+ni*7;const isF=sr(s)>0.45;const pool=isF?fN:mN;noms.push({name:pool[Math.floor(sr(s+1)*pool.length)],dept:c.pos[Math.floor(sr(s+4)*c.pos.length)],val:String(genVal(c.v[ci],s+3,ni)),gender:isF?'f':'m',pi:Math.floor(sr(s+2)*30)});}return{title,nominees:noms};});}
     function getBoardData(tabId){try{const s=localStorage.getItem('adminNominations_'+tabId);if(s){const p=JSON.parse(s);if(Array.isArray(p)&&p.some(n=>n.nominees&&n.nominees.length>0))return p.map(nom=>({title:nom.title,nominees:nom.nominees.map(n=>({name:n.name,dept:n.position||'—',val:n.value||'—',imgDirect:n.img}))}));}}catch(e){}return buildGenerated(tabId);}
@@ -615,7 +619,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         cardsGrid.classList.remove('fade-in');cardsGrid.classList.add('fade-out');
         setTimeout(()=>{cardsGrid.innerHTML='';const data=getBoardData(boardTab);
         if(!data||!data.length){cardsGrid.innerHTML='<div class="empty-state"><i class="far fa-folder-open"></i><p>Нет данных</p><small>Добавьте через админ-панель</small></div>';cardsGrid.classList.remove('fade-out');cardsGrid.classList.add('fade-in');return;}
-        data.forEach(cat=>{if(!cat.nominees||!cat.nominees.length)return;let h=`<div class="category-card"><div class="category-header"><div class="title-wrap"><span class="category-title">${cat.title}</span><i class="far fa-question-circle informer-btn"></i></div></div><div class="nominees-list">`;
+        data.forEach((cat,ci)=>{if(!cat.nominees||!cat.nominees.length)return;const icons=nomIcons[boardTab];const iconHtml=icons&&icons[ci]?`<img src="${icons[ci]}" style="width:48px;height:48px;object-fit:contain;flex-shrink:0;">`:'';let h=`<div class="category-card"><div class="category-header"><div class="title-wrap">${iconHtml}<span class="category-title">${cat.title}</span><i class="far fa-question-circle informer-btn"></i></div></div><div class="nominees-list">`;
         cat.nominees.forEach(p=>{const img=p.imgDirect||photo(p.gender||'m',p.pi||0);h+=`<div class="nominee-row"><div class="avatar-box"><img src="${img}" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'"></div><div class="info"><div class="name">${p.name}</div><div class="dept">${p.dept}</div></div><div class="score">${p.val}</div></div>`;});
         h+='</div></div>';cardsGrid.insertAdjacentHTML('beforeend',h);});
         document.querySelectorAll('.informer-btn').forEach(b=>b.addEventListener('click',()=>document.getElementById('infoModal').classList.add('active')));
@@ -750,8 +754,8 @@ document.addEventListener('DOMContentLoaded',()=>{
         btn.classList.add('joined');
         btn.innerHTML='<i class="fas fa-check-circle"></i> Вы участвуете';
         document.getElementById('individualSuccessBanner').classList.add('show');
-        closeIndividualForm();
-        document.getElementById('boardContent').scrollTo({top:document.getElementById('individualSection').offsetTop-100,behavior:'smooth'});
+        const panel=document.querySelector('#individualFormOverlay .team-form-panel');
+        panel.innerHTML=`<div style="text-align:center;padding:40px 20px;"><div style="width:64px;height:64px;border-radius:50%;background:var(--green-dark);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;"><i class="fas fa-check"></i></div><h3 style="font-size:20px;font-weight:600;margin-bottom:8px;color:var(--green-dark);">Поздравляем, ты в игре!</h3><p style="font-size:14px;color:#737373;margin-bottom:24px;">Результаты будут отображаться в таблице по итогам месяца</p><button class="btn btn-primary" onclick="closeIndividualForm()" style="margin:0 auto;">Отлично</button></div>`;
     };
 
     // Group form
@@ -782,7 +786,8 @@ document.addEventListener('DOMContentLoaded',()=>{
         btn.innerHTML='<i class="fas fa-check-circle"></i> Вы участвуете';
         document.getElementById('groupSuccessSub').textContent=teamName+': '+names.join(', ');
         document.getElementById('groupSuccessBanner').classList.add('show');
-        closeTeamForm();
+        const panel=document.querySelector('#teamFormOverlay .team-form-panel');
+        panel.innerHTML=`<div style="text-align:center;padding:40px 20px;"><div style="width:64px;height:64px;border-radius:50%;background:var(--green-dark);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;"><i class="fas fa-users"></i></div><h3 style="font-size:20px;font-weight:600;margin-bottom:8px;color:var(--green-dark);">Поздравляем, ты в игре!</h3><p style="font-size:14px;color:#737373;margin-bottom:4px;">Команда «${teamName}» зарегистрирована</p><p style="font-size:13px;color:#999;margin-bottom:24px;">${names.join(', ')}</p><button class="btn btn-primary" onclick="closeTeamForm()" style="margin:0 auto;">Отлично</button></div>`;
     };
 
     // ===== INIT =====
