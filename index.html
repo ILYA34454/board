@@ -6,9 +6,9 @@
     <title>Доска почета - РЕСО Лизинг</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap');
         :root { --white:#FFFFFF; --bg-main:#F8F9FA; --text-main:#222222; --text-gray:#828B95; --green-main:#107F40; --green-dark:#0D6445; --border:#E5E5E5; --top-bar-bg:#535C69; --top-bar-text:#CFD4D8; }
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Golos Text',sans-serif; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Onest',sans-serif; }
         body { background-color:var(--white); color:var(--text-main); height:100vh; overflow:hidden; display:flex; flex-direction:column; }
         .top-bar { height:40px; background-color:var(--top-bar-bg); display:flex; justify-content:space-between; align-items:center; padding:0 15px; font-size:12px; color:var(--top-bar-text); flex-shrink:0; }
         .top-bar-section { display:flex; align-items:center; gap:15px; }
@@ -26,26 +26,26 @@
         .menu-item.active { border-left-color:var(--green-main); background-color:var(--bg-main); color:var(--green-main); }
         .menu-item.active i { color:var(--green-main); }
         .main-content { padding:30px 40px; overflow-y:auto; background:var(--white); scroll-behavior:smooth; }
-        .banner { position:relative; height:260px; border-radius:12px; margin-bottom:32px; overflow:hidden; }
+        .banner { position:relative; border-radius:12px; margin-bottom:32px; overflow:hidden; }
         .banner-bg-link { position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; }
         .banner-bg-link img { width:100%; height:100%; object-fit:cover; }
-        .banner-content { position:relative; z-index:2; padding:30px 24px; color:var(--white); display:flex; flex-direction:column; height:100%; pointer-events:none; }
-        .breadcrumbs { font-size:14px; opacity:0.7; margin-bottom:auto; }
+        .banner-content { position:relative; z-index:2; padding:30px 24px 30px 24px; color:var(--white); display:flex; flex-direction:column; pointer-events:none; }
+        .breadcrumbs { font-size:14px; opacity:0.7; margin-bottom:56px; }
         .banner h1 { font-size:32px; font-weight:600; margin-bottom:12px; line-height:1.2; }
         .banner p { font-size:15px; line-height:1.5; color:var(--white); max-width:600px; }
         .controls-row { display:flex; align-items:stretch; margin-bottom:60px; gap:0; border-bottom:1px solid var(--border); height:48px; position:relative; }
         .controls-row.compact-margin { margin-bottom:32px; }
         .tabs-wrapper { display:flex; align-items:stretch; gap:32px; }
-        .tab { padding:0 0 20px 0; font-size:14px; color:#737373; white-space:nowrap; cursor:pointer; background:transparent; transition:all 0.2s ease; border:none; border-bottom:2px solid transparent; margin-bottom:-1px; display:flex; align-items:center; align-self:flex-end; }
+        .tab { padding:0 0 20px 0; font-size:14px; font-weight:500; color:#737373; white-space:nowrap; cursor:pointer; background:transparent; transition:all 0.2s ease; border:none; border-bottom:2px solid transparent; margin-bottom:-1px; display:flex; align-items:center; align-self:flex-end; }
         .tab:hover { color:var(--text-main); }
         .tab.active { color:var(--green-dark); border-bottom-color:var(--green-dark); }
-        .tab i { margin-right:6px; font-size:12px; transition:color 0.2s ease; }
+        .tab i { margin-right:10px; font-size:14px; transition:color 0.2s ease; }
         .tab.active i { color:var(--green-dark); }
         .tab-icon-3d { width:20px; height:20px; object-fit:contain; vertical-align:middle; margin-right:6px; }
         .controls-divider { width:1px; height:32px; background-color:var(--border); flex-shrink:0; }
-        .custom-select { position:relative; font-size:14px; line-height:1.4; display:flex; align-items:center; margin-left:auto; }
-        .select-selected { display:flex; align-items:center; padding:0; cursor:pointer; background:transparent; transition:all 0.2s ease; gap:6px; border:none; color:var(--text-main); }
-        .select-selected i { color:#737373; transition:color 0.2s ease; font-size:10px; }
+        .custom-select { position:relative; font-size:14px; line-height:1.4; display:flex; align-items:center; margin-left:auto; min-width:160px; }
+        .select-selected { display:flex; align-items:center; padding:0; cursor:pointer; background:transparent; transition:all 0.2s ease; gap:18px; border:none; color:var(--text-main); }
+        .select-selected i { color:#737373; transition:color 0.2s ease; font-size:12px; }
         .select-selected:hover { color:var(--text-main); }
         .select-selected:hover i { color:var(--text-main); }
         .select-selected.active { color:var(--text-main); }
@@ -58,25 +58,27 @@
         .section-title { font-size:20px; font-weight:600; margin-bottom:32px; color:var(--text-main); }
         .cards-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:60px; }
         .category-card { background-color:var(--white); border-radius:8px; padding:24px; position:relative; overflow:hidden; box-shadow:0 0 0 1px #EEEEEE; }
-        .category-header { margin-bottom:28px; position:relative; z-index:2; }
+        .category-header { margin-bottom:28px; position:relative; z-index:2; display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
         .title-wrap { display:flex; align-items:center; gap:8px; }
-        .category-title { font-size:16px; line-height:1.2; font-weight:600; color:var(--text-main); }
+        .category-title { font-size:16px; line-height:1.2; font-weight:600; color:var(--text-main); text-transform:capitalize; }
         .informer-btn { color:#C0C0C0; font-size:16px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; transition:all 0.2s ease; }
         .informer-btn:hover { color:var(--green-dark); }
         .nominees-list { display:flex; flex-direction:column; gap:0; position:relative; z-index:2; }
-        .nominee-row { display:flex; align-items:center; gap:16px; padding:16px 0; border-bottom:1px solid #EEEEEE; }
+        .nominee-row { display:flex; align-items:center; gap:12px; padding:16px 0; border-bottom:1px solid #EEEEEE; }
         .nominee-row:first-child { padding-top:0; }
         .nominee-row:last-child { border-bottom:none; padding-bottom:0; }
         .avatar-box { width:56px; height:56px; border-radius:50%; flex-shrink:0; }
         .avatar-box img { width:100%; height:100%; border-radius:50%; object-fit:cover; }
         .info { flex-grow:1; }
-        .name { font-size:14px; line-height:1.4; font-weight:500; margin-bottom:4px; }
+        .name { font-size:14px; line-height:1.4; font-weight:600; margin-bottom:8px; }
         .dept { font-size:14px; line-height:1.4; color:#737373; }
         .score { font-size:14px; line-height:1.4; font-weight:400; white-space:nowrap; }
         .regions-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:60px; }
-        .region-card { background-color:#F2F2F2; border-radius:8px; padding:24px; display:flex; justify-content:space-between; align-items:center; }
+        .region-card { background-color:#F7F7F7; border-radius:8px; padding:24px; display:flex; justify-content:space-between; align-items:center; position:relative; }
         .region-info { display:flex; flex-direction:column; }
-        .region-name { font-size:16px; font-weight:600; margin-bottom:10px; }
+        .region-name { font-size:16px; font-weight:600; margin-bottom:0; }
+        .region-name-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+        .region-name-row .place-badge { margin-left:0; }
         .region-score { font-size:14px; }
         .region-boss { font-size:14px; color:#737373; margin-top:28px; }
         .region-avatar-box { width:96px; height:96px; flex-shrink:0; }
@@ -85,7 +87,7 @@
         /* ===== OVERALL: TABLE ===== */
         .rating-table-wrap { margin-bottom:32px; }
         .rating-table { width:100%; border-collapse:separate; border-spacing:0; }
-        .rating-table thead th { padding:14px 16px; font-size:13px; font-weight:500; color:var(--text-main); text-align:left; background:#F2F2F2; white-space:nowrap; border-bottom:none; }
+        .rating-table thead th { padding:0 16px; height:48px; font-size:13px; font-weight:600; color:var(--text-main); text-align:left; background:#F7F7F7; white-space:nowrap; border-bottom:none; }
         .rating-table thead th:first-child { border-radius:4px 0 0 4px; }
         .rating-table thead th:last-child { border-radius:0 4px 4px 0; }
         .rating-table thead th .sort-icon { color:#C0C0C0; margin-left:4px; font-size:10px; cursor:pointer; transition:color 0.2s ease; }
@@ -104,7 +106,7 @@
         .rating-table .col-nom-inner { display:flex; align-items:center; gap:8px; }
         .rating-table .col-nom-inner .nom-dot { width:6px; height:6px; border-radius:50%; background:var(--green-dark); flex-shrink:0; }
         .rating-table .col-dept { }
-        .rating-table .col-name { font-weight:500; }
+        .rating-table .col-name { font-weight:600; }
         .rating-table .col-name-inner { display:flex; align-items:center; gap:10px; }
         .rating-table .col-name-inner .name-avatar { width:32px; height:32px; border-radius:50%; object-fit:cover; flex-shrink:0; }
         .rating-table .col-name-inner span { font-weight:400; }
@@ -135,7 +137,7 @@
         .group-card-members { font-size:14px; color:#737373; line-height:1.5; }
 
         /* ===== PARTICIPATE BTN ===== */
-        .participate-btn { display:inline-flex; align-items:center; gap:8px; padding:0 28px; height:42px; border-radius:8px; font-size:14px; font-weight:400; cursor:pointer; border:none; font-family:inherit; transition:all 0.25s ease; background:var(--green-dark); color:var(--white); }
+        .participate-btn { display:inline-flex; align-items:center; gap:8px; padding:0 16px; height:38px; border-radius:8px; font-size:14px; font-weight:500; cursor:pointer; border:none; font-family:inherit; transition:all 0.25s ease; background:var(--green-dark); color:var(--white); }
         .participate-btn:hover { background:#0a5335; }
         .participate-btn:active { transform:scale(0.97); }
         .participate-btn.joined { background:#E8F5E9; color:var(--green-dark); border:1px solid #C8E6C9; box-shadow:none; cursor:default; pointer-events:none; }
@@ -170,7 +172,7 @@
 
         /* ===== SUB-TOGGLE ===== */
         .sub-toggle { display:flex; gap:0; margin-bottom:32px; border:1px solid var(--border); border-radius:8px; overflow:hidden; width:fit-content; }
-        .sub-toggle-btn { padding:10px 24px; font-size:14px; font-weight:400; cursor:pointer; background:var(--white); color:#737373; border:none; font-family:inherit; transition:all 0.2s ease; }
+        .sub-toggle-btn { padding:10px 24px; font-size:14px; font-weight:500; cursor:pointer; background:var(--white); color:#737373; border:none; font-family:inherit; transition:all 0.2s ease; }
         .sub-toggle-btn:not(:last-child) { border-right:1px solid var(--border); }
         .sub-toggle-btn:hover { color:var(--text-main); }
         .sub-toggle-btn.active { background:#F5F5F5; color:var(--green-dark); }
@@ -179,6 +181,21 @@
         .sidebar-right::-webkit-scrollbar { display:none; }
         .right-btn { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--text-gray); font-size:14px; cursor:pointer; flex-shrink:0; background-color:#E2E8F0; transition:all 0.2s ease; }
         .right-btn:hover { background-color:var(--green-main); color:var(--white); }
+        /* Place badge in nominee rows */
+        .place-badge { font-size:12px; font-weight:500; color:#1a8a4a; background:#e2f2e8; padding:3px 10px; border-radius:20px; white-space:nowrap; line-height:1.4; flex-shrink:0; margin-left:24px; margin-right:12px; }
+        .place-sep { display:none; }
+        .place-score-wrap { display:flex; flex-direction:row; align-items:center; gap:16px; white-space:nowrap; flex-shrink:0; }
+        /* Metric subtitle in category cards */
+        .category-metric { font-size:14px; color:#999; font-weight:400; text-align:right; line-height:1.3; white-space:nowrap; flex-shrink:0; padding-top:2px; }
+        /* Region place badge */
+        .region-place { position:absolute; top:16px; right:20px; font-size:12px; font-weight:500; color:var(--green-dark); display:inline-flex; align-items:center; gap:4px; }
+        .region-place svg { flex-shrink:0; }
+        /* Regions subtitle */
+        .section-subtitle { font-size:14px; color:#999; font-weight:400; margin-top:-24px; margin-bottom:28px; }
+        /* Score column */
+        .rating-table .col-score { width:120px; text-align:right; color:var(--green-dark); font-weight:500; }
+        .rating-table thead th.col-score { text-align:right; }
+
         .cards-grid.fade-out { opacity:0; transform:translateY(8px); transition:all 0.2s ease; }
         .cards-grid.fade-in { opacity:1; transform:translateY(0); transition:all 0.3s ease; }
         .empty-state { text-align:center; padding:60px 20px; color:#737373; grid-column:1/-1; }
@@ -203,21 +220,21 @@
         .admin-tabs-wrapper { display:flex; align-items:stretch; overflow:hidden; gap:0; }
         .admin-tabs-scroll { display:flex; gap:32px; overflow-x:auto; scrollbar-width:none; scroll-behavior:smooth; align-items:stretch; }
         .admin-tabs-scroll::-webkit-scrollbar { display:none; }
-        .admin-tab { padding:0 8px 20px 8px; font-size:14px; color:#737373; white-space:nowrap; cursor:pointer; background:transparent; transition:all 0.2s ease; display:flex; align-items:center; align-self:flex-end; gap:5px; border:none; border-bottom:2px solid transparent; margin-bottom:-1px; }
+        .admin-tab { padding:0 0 20px 0; font-size:14px; font-weight:500; color:#737373; white-space:nowrap; cursor:pointer; background:transparent; transition:all 0.2s ease; display:flex; align-items:center; align-self:flex-end; gap:10px; border:none; border-bottom:2px solid transparent; margin-bottom:-1px; font-family:inherit; }
         .admin-tab:hover { color:var(--text-main); }
         .admin-tab.active { color:var(--green-dark); border-bottom-color:var(--green-dark); }
-        .admin-tab i { font-size:11px; color:#737373; transition:color 0.2s ease; }
+        .admin-tab i { font-size:14px; color:#737373; transition:color 0.2s ease; }
         .admin-tab.active i { color:var(--green-dark); }
-        .admin-period-select { position:relative; font-size:14px; flex-shrink:0; margin-left:auto; display:flex; align-items:center; }
-        .admin-period-selected { display:flex; align-items:center; padding:0; cursor:pointer; background:transparent; gap:6px; transition:all 0.2s ease; border:none; color:var(--text-main); }
+        .admin-period-select { position:relative; font-size:14px; flex-shrink:0; margin-left:auto; display:flex; align-items:center; min-width:160px; }
+        .admin-period-selected { display:flex; align-items:center; padding:0; cursor:pointer; background:transparent; gap:18px; transition:all 0.2s ease; border:none; color:var(--text-main); }
         .admin-period-selected:hover { color:var(--text-main); }
         .admin-period-selected.active { color:var(--text-main); }
-        .admin-period-selected i { font-size:10px; color:#737373; transition:color 0.2s ease; }
+        .admin-period-selected i { font-size:12px; color:#737373; transition:color 0.2s ease; }
         .admin-period-selected.active i { color:var(--text-main); }
         .admin-period-items { position:absolute; top:110%; left:0; right:0; background:var(--white); border:1px solid var(--border); border-radius:6px; box-shadow:0 8px 24px rgba(0,0,0,0.12); z-index:200; opacity:0; visibility:hidden; transform:translateY(-10px); transition:all 0.3s ease; max-height:240px; overflow-y:auto; }
         .admin-period-items.show { opacity:1; visibility:visible; transform:translateY(0); }
-        .admin-period-items div { padding:8px 12px; cursor:pointer; font-size:13px; transition:all 0.15s; }
-        .admin-period-items div:hover { background:var(--bg-main); color:var(--green-dark); }
+        .admin-period-items div { padding:10px 15px; cursor:pointer; font-size:14px; transition:all 0.2s ease; }
+        .admin-period-items div:hover { background:var(--bg-main); color:var(--green-main); padding-left:20px; }
         .admin-period-items div.selected { color:var(--green-dark); font-weight:500; }
         .admin-body { flex:1; overflow-y:auto; padding:0 36px 36px 36px; }
         .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:8px; font-size:14px; font-weight:500; cursor:pointer; transition:all 0.2s ease; border:none; font-family:inherit; user-select:none; }
@@ -227,6 +244,24 @@
         .btn-secondary { background:var(--white); color:var(--text-main); border:1px solid var(--border); }
         .btn-secondary:hover { border-color:var(--green-dark); color:var(--green-dark); }
         .btn-danger { background:var(--white); color:#DC3545; border:1px solid var(--border); }
+        .btn-about-contest { background:var(--white); color:var(--text-main); border:none; padding:10px 24px; font-size:14px; margin-top:30px; border-radius:8px; cursor:pointer; transition:all 0.2s ease; display:inline-flex; align-items:center; gap:8px; font-weight:500; font-family:inherit; align-self:flex-start; }
+        .btn-about-contest:hover { background:#F0F0F0; }
+        .about-contest-modal .modal-content { width:680px; max-height:80vh; display:flex; flex-direction:column; padding:0; }
+        .about-contest-header { padding:24px 28px 0 28px; }
+        .about-contest-tabs { display:flex; gap:32px; border-bottom:1px solid var(--border); padding:0 28px; margin-top:16px; }
+        .about-contest-tab { padding:0 0 12px 0; font-size:14px; font-weight:500; color:#737373; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; transition:all 0.2s ease; background:none; border-top:none; border-left:none; border-right:none; font-family:inherit; }
+        .about-contest-tab:hover { color:var(--text-main); }
+        .about-contest-tab.active { color:var(--green-dark); border-bottom-color:var(--green-dark); }
+        .about-contest-body { padding:24px 28px 28px 28px; overflow-y:auto; flex:1; }
+        .about-contest-body h3 { font-size:16px; font-weight:600; margin:16px 0 8px 0; color:var(--text-main); }
+        .about-contest-body h3:first-child { margin-top:0; }
+        .about-contest-body p { font-size:14px; line-height:1.7; color:#444; margin-bottom:8px; }
+        .about-contest-body ul { padding-left:20px; margin-bottom:16px; }
+        .about-contest-body ul li { font-size:14px; line-height:1.7; color:#444; margin-bottom:4px; }
+        .about-contest-body ol { padding-left:20px; margin-bottom:16px; }
+        .about-contest-body ol li { font-size:14px; line-height:1.7; color:#444; margin-bottom:4px; }
+        .about-contest-body .highlight-box { background:#EAF5EE; border-radius:8px; padding:14px 18px; margin:16px 0; font-size:14px; line-height:1.6; color:var(--green-dark); font-weight:500; }
+        .about-contest-body a { color:var(--green-dark); text-decoration:underline; }
         .btn-danger:hover { border-color:#DC3545; background:#FFF5F5; }
         .btn-sm { padding:7px 14px; font-size:13px; }
         .btn-close-panel { background:none; border:none; font-size:22px; color:#999; cursor:pointer; padding:4px; transition:all 0.2s ease; }
@@ -239,7 +274,7 @@
         .nom-title-edit:hover { color:var(--green-dark); background:#F0FAF4; }
         .nom-card-actions { display:flex; gap:8px; }
         .nom-table { width:100%; }
-        .nom-table-header { display:grid; grid-template-columns:36px 44px 1fr 1fr 160px 72px; gap:12px; padding:10px 16px; background:#F2F2F2; border-bottom:none; border-radius:4px; font-size:13px; color:var(--text-main); font-weight:500; margin-bottom:4px; }
+        .nom-table-header { display:grid; grid-template-columns:36px 44px 1fr 1fr 160px 72px; gap:12px; padding:10px 16px; background:#F7F7F7; border-bottom:none; border-radius:4px; font-size:13px; color:var(--text-main); font-weight:500; margin-bottom:4px; }
         .nom-table-row { display:grid; grid-template-columns:36px 44px 1fr 1fr 160px 72px; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid #E5E5E5; font-size:14px; }
         .nom-table-row:last-child { border-bottom:none; }
         .rank-badge { width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:500; background:transparent; color:#737373; }
@@ -328,29 +363,30 @@
                 <div class="breadcrumbs">Главная > Доска почета</div>
                 <h1>Лучшие сотрудники 2026</h1>
                 <p>Здесь мы отмечаем тех, кто показывает лучшие результаты. Выберите департамент, чтобы увидеть подробности.</p>
+                <button class="btn btn-about-contest" onclick="document.getElementById('aboutContestModal').classList.add('active')" style="pointer-events:auto;"><i class="fas fa-info-circle"></i> О конкурсе</button>
             </div>
         </div>
         <div class="controls-row">
             <div class="tabs-wrapper" id="tabsWrapper"></div>
             <div class="custom-select">
-                <div class="select-selected" id="selectSelected"><span id="selectedText">Апрель 2026</span> <i class="fas fa-chevron-down" style="font-size:10px;"></i></div>
+                <div class="select-selected" id="selectSelected"><span id="selectedText">Апрель 2026</span> <i class="fas fa-chevron-down"></i></div>
                 <div class="select-items" id="selectItems"></div>
             </div>
         </div>
         <div id="deptView">
-            <h2 class="section-title">Лучшие в номинациях</h2>
-            <div class="cards-grid fade-in" id="cardsGrid"></div>
+            <div id="nomSections"></div>
             <h2 class="section-title" id="regionsTitle">Регионы-лидеры продаж</h2>
+            <p class="section-subtitle" id="regionsSubtitle">План выполнен более чем на 80%</p>
             <div class="regions-grid" id="regionsGrid"></div>
         </div>
         <div id="overallView" style="display:none;">
-            <div style="display:flex;align-items:center;gap:20px;margin-bottom:32px;">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px;">
                 <div class="sub-toggle" id="subToggle" style="margin-bottom:0;">
-                    <button class="sub-toggle-btn active" data-sub="individual"><i class="fas fa-user" style="margin-right:6px;font-size:12px;"></i>Индивидуальный рейтинг</button>
-                    <button class="sub-toggle-btn" data-sub="group"><i class="fas fa-users" style="margin-right:6px;font-size:12px;"></i>Групповой рейтинг</button>
+                    <button class="sub-toggle-btn active" data-sub="individual">Индивидуальный рейтинг</button>
+                    <button class="sub-toggle-btn" data-sub="group">Групповой рейтинг</button>
                 </div>
-                <button class="participate-btn" id="btnParticipateIndividual" onclick="openIndividualForm()" style="margin-left:auto;"><i class="fas fa-rocket"></i> Участвую</button>
-                <button class="participate-btn" id="btnParticipateGroup" onclick="openTeamForm()" style="margin-left:auto;display:none;"><i class="fas fa-rocket"></i> Участвую</button>
+                <button class="participate-btn" id="btnParticipateIndividual" onclick="openIndividualForm()"><i class="fas fa-rocket"></i> Участвую</button>
+                <button class="participate-btn" id="btnParticipateGroup" onclick="openTeamForm()" style="display:none;"><i class="fas fa-rocket"></i> Участвую</button>
             </div>
             <div id="individualSection">
                 <div class="success-banner" id="individualSuccessBanner">
@@ -366,6 +402,7 @@
                             <th class="col-name">Сотрудник <i class="fas fa-chevron-down sort-icon"></i></th>
                             <th class="col-position">Должность</th>
                             <th class="col-dept">Департамент <i class="fas fa-chevron-down sort-icon"></i></th>
+                            <th class="col-score">Кол-во баллов</th>
                         </tr></thead>
                         <tbody id="ratingBody"></tbody>
                     </table>
@@ -451,6 +488,20 @@
 <div class="modal-overlay" id="renameNomModal"><div class="modal-content"><i class="fas fa-times modal-close" onclick="closeModal('renameNomModal')"></i><h3 class="modal-title">Переименовать номинацию</h3><div class="form-group" style="margin-bottom:18px;"><label class="form-label">Название</label><input class="form-input" id="renameNomInput"></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('renameNomModal')">Отмена</button><button class="btn btn-primary" id="confirmRenameNom"><i class="fas fa-check"></i> Сохранить</button></div></div></div>
 <div class="modal-overlay" id="addNomModal"><div class="modal-content"><i class="fas fa-times modal-close" onclick="closeModal('addNomModal')"></i><h3 class="modal-title">Добавить номинацию</h3><div class="form-group" style="margin-bottom:18px;"><label class="form-label">Название</label><input class="form-input" id="newNomName" placeholder="Лучший менеджер"></div><div class="modal-actions"><button class="btn btn-secondary" onclick="closeModal('addNomModal')">Отмена</button><button class="btn btn-primary" id="confirmAddNom"><i class="fas fa-check"></i> Добавить</button></div></div></div>
 <div class="modal-overlay" id="infoModal"><div class="modal-content"><i class="fas fa-times modal-close" onclick="closeModal('infoModal')"></i><h3 class="modal-title">Как формируется рейтинг</h3><p class="modal-text" style="margin-bottom:0;">Рейтинг формируется на основе KPI, объема продаж, маржинальности и дополнительных услуг за выбранный период.</p></div></div>
+
+<div class="modal-overlay about-contest-modal" id="aboutContestModal">
+<div class="modal-content">
+<i class="fas fa-times modal-close" onclick="closeModal('aboutContestModal')"></i>
+<div class="about-contest-header">
+<h3 class="modal-title" style="font-size:20px;margin-bottom:0;">О конкурсе «РЕСО — это мы!»</h3>
+</div>
+<div class="about-contest-tabs">
+<button class="about-contest-tab active" onclick="switchAboutTab(0)">Для участников</button>
+<button class="about-contest-tab" onclick="switchAboutTab(1)">Рабочая группа</button>
+</div>
+<div class="about-contest-body" id="aboutContestBody"></div>
+</div>
+</div>
 <div class="team-form-overlay" id="individualFormOverlay">
     <div class="team-form-panel">
         <i class="fas fa-times modal-close" onclick="closeIndividualForm()"></i>
@@ -497,6 +548,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
+    // Clear stale nomination caches to pick up updated titles
+    try{localStorage.removeItem('adminNominations_commercial');localStorage.removeItem('adminNominations_security');}catch(e){}
     const categories=[
         {id:'commercial',name:'Коммерческий департамент',icon:'fas fa-handshake',img3d:'https://bvconuycpdvgzbvbkijl.supabase.co/storage/v1/object/public/sizes/36f0c6-money-bag/dynamic/200/color.webp'},
         {id:'security',name:'Департамент экономической безопасности',icon:'fas fa-shield-alt',img3d:'https://bvconuycpdvgzbvbkijl.supabase.co/storage/v1/object/public/sizes/b91186-shield/dynamic/200/color.webp'},
@@ -513,8 +566,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     let regions=loadRegions();
 
     const defaultNomTitles={
-        commercial:["Лидер по марже среди сотрудников","Лидер по марже среди директоров","Лидер по объёму среди сотрудников","Лидер по объёму среди директоров"],
+        commercial:["Среди сотрудников","Среди директоров","Среди сотрудников","Среди директоров"],
         security:["Лучший аналитик рисков","Предотвращение потерь","Скорость реагирования","Качество отчетности"]
+    };
+    const nomMetrics={
+        commercial:["Процент выполнения личного плана","Процент выполнения плана подразделения","Объем сделок с маржой не ниже 80% от 7,5","Выполнение плана подразделения в %"],
+        security:["Кол-во выявленных рисков","Сумма предотвращённых потерь","Среднее время реагирования","Оценка качества отчётов"]
     };
     const nomIcons={
         commercial:["https://i.ibb.co/tp3G6WF8/Procent-1.png","https://i.ibb.co/QFmmMpZR/Card-1.png","https://i.ibb.co/HLVqSPSK/Star-1.png","https://i.ibb.co/tpjfTCbN/Plus-1.png"],
@@ -537,28 +594,28 @@ document.addEventListener('DOMContentLoaded',()=>{
     function sr(seed){let x=Math.sin(seed)*10000;return x-Math.floor(x);}
     const mN=["Иванов Алексей","Сидоров Максим","Попов Дмитрий","Васильев Николай","Михайлов Артём","Степанов Роман","Кузьмин Андрей","Щербаков Даниил","Жуков Владимир","Фролов Егор","Баранов Кирилл","Медведев Тимур","Комаров Виталий","Зайцев Денис","Ершов Олег","Лазарев Иван","Савельев Марк","Орехов Глеб","Панов Матвей","Рябов Никита"];
     const fN=["Иванова Мария","Сидорова Анна","Попова Елена","Васильева Софья","Михайлова Алиса","Степанова Полина","Кузьмина Виктория","Щербакова Дарья","Жукова Екатерина","Фролова Арина","Баранова Ксения","Медведева Надежда","Комарова Ульяна","Зайцева Вероника","Ершова Лидия","Лазарева Ирина","Савельева Юлия","Орехова Диана","Панова Милана","Рябова Таисия"];
-    const dCfg={commercial:{pos:["Директор по продажам","Старший менеджер","Менеджер по продажам","Руководитель отдела","Ведущий менеджер"],t:["Лидер по марже среди сотрудников","Лидер по марже среди директоров","Лидер по объёму среди сотрудников","Лидер по объёму среди директоров"],v:["percent","percent","money","money"]},security:{pos:["Руководитель СБ","Аналитик рисков","Старший специалист","Специалист по проверкам","Инспектор"],t:["Лучший аналитик рисков","Предотвращение потерь","Скорость реагирования","Качество отчетности"],v:["checks","money","time","percent"]}};
+    const dCfg={commercial:{pos:["Директор по продажам","Старший менеджер","Менеджер по продажам","Руководитель отдела","Ведущий менеджер"],t:["среди сотрудников","среди директоров","среди сотрудников","среди директоров"],v:["percent","percent","money","money"]},security:{pos:["Руководитель СБ","Аналитик рисков","Старший специалист","Специалист по проверкам","Инспектор"],t:["Лучший аналитик рисков","Предотвращение потерь","Скорость реагирования","Качество отчетности"],v:["checks","money","time","percent"]}};
     function genVal(type,seed,rank){let b=sr(seed);switch(type){case'money':return((Math.floor(b*20)+5)-rank*3)+' '+(Math.floor(sr(seed+99)*9)+1)+'00 000 ₽';case'percent':return(95-rank*7-Math.floor(b*5))+'%';case'time':return(0.8+rank*0.5+b*0.3).toFixed(1)+' ч.';case'checks':return(48-rank*8-Math.floor(b*5))+' проверок';default:return'—';}}
     function buildGenerated(key){const c=dCfg[key];if(!c)return null;const seed=key.split('').reduce((a,ch)=>a+ch.charCodeAt(0),0);return c.t.map((title,ci)=>{const noms=[];for(let ni=0;ni<3;ni++){const s=seed+ci*17+ni*7;const isF=sr(s)>0.45;const pool=isF?fN:mN;noms.push({name:pool[Math.floor(sr(s+1)*pool.length)],dept:c.pos[Math.floor(sr(s+4)*c.pos.length)],val:String(genVal(c.v[ci],s+3,ni)),gender:isF?'f':'m',pi:Math.floor(sr(s+2)*30)});}return{title,nominees:noms};});}
     function getBoardData(tabId){try{const s=localStorage.getItem('adminNominations_'+tabId);if(s){const p=JSON.parse(s);if(Array.isArray(p)&&p.some(n=>n.nominees&&n.nominees.length>0))return p.map(nom=>({title:nom.title,nominees:nom.nominees.map(n=>({name:n.name,dept:n.position||'—',val:n.value||'—',imgDirect:n.img}))}));}}catch(e){}return buildGenerated(tabId);}
 
     // ===== OVERALL DATA =====
     function getOverallIndividual(){return[
-        {name:"Соколов Михаил",position:"Старший специалист",dept:"Деп. экономической безопасности",nomination:"Директор-лидер по объему продаж",place:"1 место",img:"https://randomuser.me/api/portraits/men/15.jpg"},
-        {name:"Шарапов Андрей",position:"Руководитель департамента",dept:"Коммерческий департамент",nomination:"Директор-лидер по объему продаж",place:"1 место",img:"https://randomuser.me/api/portraits/men/32.jpg"},
-        {name:"Васильков Евгений",position:"Менеджер по продажам",dept:"Деп. экономической безопасности",nomination:"Директор-лидер по объему продаж",place:"1 место",img:"https://randomuser.me/api/portraits/men/46.jpg"},
-        {name:"Гуськин Александр",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Директор-лидер по объему продаж",place:"1 место",img:"https://randomuser.me/api/portraits/men/64.jpg"},
-        {name:"Лебедева Светлана",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Маржинальность",place:"1 место",img:"https://randomuser.me/api/portraits/women/26.jpg"},
-        {name:"Грязнова Александра",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Маржинальность",place:"2 место",img:"https://randomuser.me/api/portraits/women/33.jpg"},
-        {name:"Комарова Анна",position:"Менеджер по продажам",dept:"Деп. экономической безопасности",nomination:"Объем продаж",place:"1 место",img:"https://randomuser.me/api/portraits/women/44.jpg"},
-        {name:"Андреев Артем",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Объем продаж",place:"2 место",img:"https://randomuser.me/api/portraits/men/7.jpg"},
-        {name:"Глупышко Сергей",position:"Менеджер по продажам",dept:"Деп. экономической безопасности",nomination:"Продажа дополнительных услуг",place:"1 место",img:"https://randomuser.me/api/portraits/men/10.jpg"},
-        {name:"Шишка Вячеслав",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Продажа дополнительных услуг",place:"2 место",img:"https://randomuser.me/api/portraits/men/28.jpg"},
-        {name:"Абдумалиева Фарангиз",position:"Директор по продажам",dept:"Коммерческий департамент",nomination:"Директор-лидер по объему продаж",place:"2 место",img:"https://randomuser.me/api/portraits/women/44.jpg"},
-        {name:"Кузнецова Ольга",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Маржинальность",place:"3 место",img:"https://randomuser.me/api/portraits/women/58.jpg"},
-        {name:"Петров Дмитрий",position:"Старший менеджер",dept:"Коммерческий департамент",nomination:"Объем продаж",place:"3 место",img:"https://randomuser.me/api/portraits/men/52.jpg"},
-        {name:"Фролова Арина",position:"Аналитик рисков",dept:"Деп. экономической безопасности",nomination:"Лучший аналитик рисков",place:"1 место",img:"https://randomuser.me/api/portraits/women/8.jpg"},
-        {name:"Баранов Кирилл",position:"Старший специалист",dept:"Деп. экономической безопасности",nomination:"Предотвращение потерь",place:"1 место",img:"https://randomuser.me/api/portraits/men/41.jpg"}
+        {name:"Соколов Михаил",position:"Старший специалист",dept:"Деп. экономической безопасности",nomination:"Директор-лидер по объему продаж",place:"1 место",score:"—",img:"https://randomuser.me/api/portraits/men/15.jpg"},
+        {name:"Шарапов Андрей",position:"Руководитель департамента",dept:"Коммерческий департамент",nomination:"Директор-лидер по объему продаж",place:"1 место",score:"—",img:"https://randomuser.me/api/portraits/men/32.jpg"},
+        {name:"Васильков Евгений",position:"Менеджер по продажам",dept:"Деп. экономической безопасности",nomination:"Директор-лидер по объему продаж",place:"1 место",score:"—",img:"https://randomuser.me/api/portraits/men/46.jpg"},
+        {name:"Гуськин Александр",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Директор-лидер по объему продаж",place:"1 место",score:"—",img:"https://randomuser.me/api/portraits/men/64.jpg"},
+        {name:"Лебедева Светлана",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Маржинальность",place:"1 место",score:"—",img:"https://randomuser.me/api/portraits/women/26.jpg"},
+        {name:"Грязнова Александра",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Маржинальность",place:"2 место",score:"—",img:"https://randomuser.me/api/portraits/women/33.jpg"},
+        {name:"Комарова Анна",position:"Менеджер по продажам",dept:"Деп. экономической безопасности",nomination:"Объем продаж",place:"1 место",score:"—",img:"https://randomuser.me/api/portraits/women/44.jpg"},
+        {name:"Андреев Артем",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Объем продаж",place:"2 место",score:"—",img:"https://randomuser.me/api/portraits/men/7.jpg"},
+        {name:"Глупышко Сергей",position:"Менеджер по продажам",dept:"Деп. экономической безопасности",nomination:"Продажа дополнительных услуг",place:"1 место",score:"—",img:"https://randomuser.me/api/portraits/men/10.jpg"},
+        {name:"Шишка Вячеслав",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Продажа дополнительных услуг",place:"2 место",score:"—",img:"https://randomuser.me/api/portraits/men/28.jpg"},
+        {name:"Абдумалиева Фарангиз",position:"Директор по продажам",dept:"Коммерческий департамент",nomination:"Директор-лидер по объему продаж",place:"2 место",score:"—",img:"https://randomuser.me/api/portraits/women/44.jpg"},
+        {name:"Кузнецова Ольга",position:"Менеджер по продажам",dept:"Коммерческий департамент",nomination:"Маржинальность",place:"3 место",score:"—",img:"https://randomuser.me/api/portraits/women/58.jpg"},
+        {name:"Петров Дмитрий",position:"Старший менеджер",dept:"Коммерческий департамент",nomination:"Объем продаж",place:"3 место",score:"—",img:"https://randomuser.me/api/portraits/men/52.jpg"},
+        {name:"Фролова Арина",position:"Аналитик рисков",dept:"Деп. экономической безопасности",nomination:"Лучший аналитик рисков",place:"1 место",score:"—",img:"https://randomuser.me/api/portraits/women/8.jpg"},
+        {name:"Баранов Кирилл",position:"Старший специалист",dept:"Деп. экономической безопасности",nomination:"Предотвращение потерь",place:"1 место",score:"—",img:"https://randomuser.me/api/portraits/men/41.jpg"}
     ];}
     function getOverallGroups(){return[
         {name:"Команда «Москва-Центр»",metric:"Совокупный объём: 64 420 000 ₽",members:[
@@ -586,7 +643,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     // ===== BOARD =====
     let boardTab='commercial';
     const tabsWrapper=document.getElementById('tabsWrapper');
-    const cardsGrid=document.getElementById('cardsGrid');
 
     function buildBoardTabs(){
         tabsWrapper.innerHTML='';
@@ -594,7 +650,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             const t=document.createElement('div');
             t.className='tab'+(cat.id===boardTab?' active':'');
             t.dataset.tab=cat.id;
-            t.innerHTML=cat.img3d?`<img class="tab-icon-3d" src="${cat.img3d}"> ${cat.name}`:`<i class="${cat.icon}"></i> ${cat.name}`;
+            t.innerHTML=`<i class="${cat.icon}" style="font-size:14px;"></i> ${cat.name}`;
             t.addEventListener('click',()=>{tabsWrapper.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');boardTab=cat.id;switchView();});
             tabsWrapper.appendChild(t);
         });
@@ -612,21 +668,53 @@ document.addEventListener('DOMContentLoaded',()=>{
     monthNames.forEach(m=>{const t=m+' 2026';const d=document.createElement('div');d.textContent=t;if(t===selectedText.textContent)d.classList.add('selected');d.addEventListener('click',e=>{selectItems.querySelectorAll('div').forEach(x=>x.classList.remove('selected'));e.target.classList.add('selected');selectedText.textContent=t;selectItems.classList.remove('show');selectSelected.classList.remove('active');renderBoard();});selectItems.appendChild(d);});
     selectSelected.addEventListener('click',e=>{e.stopPropagation();selectItems.classList.toggle('show');selectSelected.classList.toggle('active');});
 
-    function renderBoardRegions(){const g=document.getElementById('regionsGrid');g.innerHTML='';regions.forEach(r=>{g.insertAdjacentHTML('beforeend',`<div class="region-card"><div class="region-info"><div class="region-name">${r.name}</div><div class="region-score">${r.value}</div><div class="region-boss">Руководитель: ${r.boss}</div></div><div class="region-avatar-box"><img src="${r.img}" class="region-avatar" onerror="this.src='https://randomuser.me/api/portraits/lego/5.jpg'"></div></div>`);});}
-    function updateRegVis(){const s=boardTab==='commercial';document.getElementById('regionsTitle').style.display=s?'':'none';document.getElementById('regionsGrid').style.display=s?'':'none';}
+    function renderBoardRegions(){const g=document.getElementById('regionsGrid');g.innerHTML='';const placeNames=['1 место','2 место','3 место'];regions.forEach((r,ri)=>{g.insertAdjacentHTML('beforeend',`<div class="region-card"><div class="region-info"><div class="region-name-row"><span class="region-name">${r.name}</span><span class="place-badge">${placeNames[ri]||''}</span></div><div class="region-score">${r.value}</div><div class="region-boss">Руководитель: ${r.boss}</div></div><div class="region-avatar-box"><img src="${r.img}" class="region-avatar" onerror="this.src='https://randomuser.me/api/portraits/lego/5.jpg'"></div></div>`);});}
+    function updateRegVis(){const s=boardTab==='commercial';document.getElementById('regionsTitle').style.display=s?'':'none';document.getElementById('regionsSubtitle').style.display=s?'':'none';document.getElementById('regionsGrid').style.display=s?'':'none';}
+
+    const nomGroups={
+        commercial:[
+            {title:"Лидеры по марже",indices:[0,1]},
+            {title:"Лидеры по объёму продаж",indices:[2,3]}
+        ]
+    };
 
     function renderBoard(){
-        cardsGrid.classList.remove('fade-in');cardsGrid.classList.add('fade-out');
-        setTimeout(()=>{cardsGrid.innerHTML='';const data=getBoardData(boardTab);
-        if(!data||!data.length){cardsGrid.innerHTML='<div class="empty-state"><i class="far fa-folder-open"></i><p>Нет данных</p><small>Добавьте через админ-панель</small></div>';cardsGrid.classList.remove('fade-out');cardsGrid.classList.add('fade-in');return;}
-        data.forEach((cat,ci)=>{if(!cat.nominees||!cat.nominees.length)return;const icons=nomIcons[boardTab];const iconHtml=icons&&icons[ci]?`<img src="${icons[ci]}" style="width:48px;height:48px;object-fit:contain;flex-shrink:0;">`:'';let h=`<div class="category-card"><div class="category-header"><div class="title-wrap">${iconHtml}<span class="category-title">${cat.title}</span><i class="far fa-question-circle informer-btn"></i></div></div><div class="nominees-list">`;
-        cat.nominees.forEach(p=>{const img=p.imgDirect||photo(p.gender||'m',p.pi||0);h+=`<div class="nominee-row"><div class="avatar-box"><img src="${img}" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'"></div><div class="info"><div class="name">${p.name}</div><div class="dept">${p.dept}</div></div><div class="score">${p.val}</div></div>`;});
-        h+='</div></div>';cardsGrid.insertAdjacentHTML('beforeend',h);});
-        document.querySelectorAll('.informer-btn').forEach(b=>b.addEventListener('click',()=>document.getElementById('infoModal').classList.add('active')));
-        cardsGrid.classList.remove('fade-out');cardsGrid.classList.add('fade-in');},200);
+        const container=document.getElementById('nomSections');
+        container.innerHTML='';
+        const data=getBoardData(boardTab);
+        if(!data||!data.length){container.innerHTML='<div class="empty-state"><i class="far fa-folder-open"></i><p>Нет данных</p><small>Добавьте через админ-панель</small></div>';return;}
+        const metrics=nomMetrics[boardTab]||[];
+        const placeNames=['1 место','2 место','3 место'];
+        const groups=nomGroups[boardTab];
+        if(groups){
+            groups.forEach(grp=>{
+                let section=`<h2 class="section-title">${grp.title}</h2><div class="cards-grid fade-in">`;
+                grp.indices.forEach(ci=>{
+                    const cat=data[ci];
+                    if(!cat||!cat.nominees||!cat.nominees.length)return;
+                    const metricHtml=metrics[ci]?`<span class="category-metric">${metrics[ci]}</span>`:'';
+                    section+=`<div class="category-card"><div class="category-header"><div class="title-wrap"><span class="category-title">${cat.title}</span></div>${metricHtml}</div><div class="nominees-list">`;
+                    cat.nominees.forEach((p,pi)=>{const img=p.imgDirect||photo(p.gender||'m',p.pi||0);const place=placeNames[pi]||'';section+=`<div class="nominee-row"><div class="avatar-box"><img src="${img}" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'"></div><div class="info"><div class="name">${p.name}</div><div class="dept">${p.dept}</div></div><span class="place-badge">${place}</span><span class="score">${p.val}</span></div>`;});
+                    section+='</div></div>';
+                });
+                section+='</div>';
+                container.insertAdjacentHTML('beforeend',section);
+            });
+        } else {
+            let html='<h2 class="section-title">Лучшие в номинациях</h2><div class="cards-grid fade-in">';
+            data.forEach((cat,ci)=>{
+                if(!cat.nominees||!cat.nominees.length)return;
+                const metricHtml=metrics[ci]?`<span class="category-metric">${metrics[ci]}</span>`:'';
+                html+=`<div class="category-card"><div class="category-header"><div class="title-wrap"><span class="category-title">${cat.title}</span></div>${metricHtml}</div><div class="nominees-list">`;
+                cat.nominees.forEach((p,pi)=>{const img=p.imgDirect||photo(p.gender||'m',p.pi||0);const place=placeNames[pi]||'';html+=`<div class="nominee-row"><div class="avatar-box"><img src="${img}" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'"></div><div class="info"><div class="name">${p.name}</div><div class="dept">${p.dept}</div></div><span class="place-badge">${place}</span><span class="score">${p.val}</span></div>`;});
+                html+='</div></div>';
+            });
+            html+='</div>';
+            container.insertAdjacentHTML('beforeend',html);
+        }
     }
 
-    function renderOverallIndividual(){const body=document.getElementById('ratingBody');body.innerHTML='';const data=getOverallIndividual();const show=Math.min(data.length,10);for(let i=0;i<show;i++){const p=data[i];body.insertAdjacentHTML('beforeend',`<tr><td class="col-num">${i+1}</td><td class="col-place">${p.place}</td><td class="col-name"><div class="col-name-inner"><img class="name-avatar" src="${p.img}" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'"><span>${p.name}</span></div></td><td class="col-position">${p.position}</td><td class="col-dept">${p.dept}</td></tr>`);}document.getElementById('tableFooterInfo').textContent='Показано 1–'+show+' из '+data.length;}
+    function renderOverallIndividual(){const body=document.getElementById('ratingBody');body.innerHTML='';const data=getOverallIndividual();const show=Math.min(data.length,10);for(let i=0;i<show;i++){const p=data[i];body.insertAdjacentHTML('beforeend',`<tr><td class="col-num">${i+1}</td><td class="col-place">${p.place}</td><td class="col-name"><div class="col-name-inner"><img class="name-avatar" src="${p.img}" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'"><span>${p.name}</span></div></td><td class="col-position">${p.position}</td><td class="col-dept">${p.dept}</td><td class="col-score">${p.score||'—'}</td></tr>`);}document.getElementById('tableFooterInfo').textContent='Показано 1–'+show+' из '+data.length;}
 
     function renderOverallGroups(){const grid=document.getElementById('groupGrid');grid.innerHTML='';getOverallGroups().forEach((g,gi)=>{const avatars=g.members.map(m=>`<img class="g-avatar" src="${m.img}" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">`).join('');const names=g.members.map(m=>m.name).join(', ');grid.insertAdjacentHTML('beforeend',`<div class="group-card"><div class="group-card-title">${g.name}</div><div class="group-card-avatars">${avatars}</div><div class="group-card-members">${names}</div></div>`);});}
 
@@ -789,6 +877,119 @@ document.addEventListener('DOMContentLoaded',()=>{
         const panel=document.querySelector('#teamFormOverlay .team-form-panel');
         panel.innerHTML=`<div style="text-align:center;padding:40px 20px;"><div style="width:64px;height:64px;border-radius:50%;background:var(--green-dark);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;"><i class="fas fa-users"></i></div><h3 style="font-size:20px;font-weight:600;margin-bottom:8px;color:var(--green-dark);">Поздравляем, ты в игре!</h3><p style="font-size:14px;color:#737373;margin-bottom:4px;">Команда «${teamName}» зарегистрирована</p><p style="font-size:13px;color:#999;margin-bottom:24px;">${names.join(', ')}</p><button class="btn btn-primary" onclick="closeTeamForm()" style="margin:0 auto;">Отлично</button></div>`;
     };
+
+    // ===== ABOUT CONTEST =====
+    const aboutContestContent=[
+        `<h3>Стартует главный конкурс года!</h3>
+<p>В РЕСО-Лизинг каждый сотрудник — важная часть большой команды.</p>
+<p>В 2026 году, объявленном Годом команды и Годом каждого сотрудника, мы запускаем конкурс «Мы — РЕСО», чтобы ещё раз напомнить: наш общий успех начинается с вас.</p>
+<div class="highlight-box">Давайте вместе докажем, что «Мы — РЕСО» — это не просто слова, а настоящая философия единства!</div>
+<h3>Превратите возможности в реальные достижения</h3>
+<ul>
+<li>Продемонстрируйте свой профессионализм</li>
+<li>Внесите вклад в развитие компании</li>
+<li>Получите признание коллег и руководства</li>
+<li>Станьте частью команды победителей</li>
+</ul>
+<h3>Что вас ждёт в конкурсе?</h3>
+<ul>
+<li>Интересные и полезные ежемесячные задания</li>
+<li>Возможность проявить креативность</li>
+<li>Работу в команде единомышленников</li>
+<li>Публичное признание достижений</li>
+</ul>
+<h3>Как стать участником: два пути к успеху!</h3>
+<p><strong>Вариант 1: Путь Индивидуального Лидера</strong></p>
+<ul>
+<li>Продемонстрируйте свои таланты в одиночку</li>
+<li>Получайте баллы за личные достижения</li>
+<li>Развивайте профессиональные компетенции</li>
+<li>Соревнуйтесь с другими участниками на равных</li>
+</ul>
+<p><strong>Вариант 2: Путь Командного Лидера</strong></p>
+<ul>
+<li>Объедините 4–5 талантливых коллег из разных отделов и департаментов (не более 2 человек из одного департамента)</li>
+<li>Используйте сильные стороны каждого участника</li>
+<li>Достигайте целей быстрее благодаря командной работе</li>
+</ul>
+<h3>Правила</h3>
+<ul>
+<li>Из двух вариантов участия необходимо выбрать только один</li>
+<li>Если участник покидает группу, набранные командой баллы сохраняются за командой</li>
+<li>О выходе из группы нужно предупредить заранее (минимум за 1 неделю)</li>
+<li>Вход в команду возможен только в течение 2-го квартала</li>
+</ul>
+<p>Лидеры коммерческого департамента и департамента экономической безопасности будут определены по KPI за период конкурса.</p>
+<h3>Как зарабатываются баллы?</h3>
+<p><strong>Ваша активность = ваши баллы!</strong></p>
+<ul>
+<li>Количество баллов определяется сложностью задания</li>
+<li>Дополнительные баллы доступны за участие в стратегических проектах компании</li>
+<li>При групповом участии итоговый результат равен сумме баллов всех членов команды</li>
+</ul>
+<h3>Главный приз</h3>
+<div class="highlight-box">Незабываемое путешествие на легендарное озеро Байкал!</div>
+<p><strong>В индивидуальном зачёте:</strong> первые 10 победителей личного первенства</p>
+<p><strong>В командном зачёте:</strong> лучшая команда группового соревнования</p>
+<h3>Преимущества участия</h3>
+<ul>
+<li>Формирование личного рейтинга на корпоративном портале</li>
+<li>Корпоративные награды победителям месяца</li>
+<li>Незабываемые впечатления от участия</li>
+<li>Возможность поехать в корпоративный тур на Байкал</li>
+</ul>
+<h3>Присоединяйтесь!</h3>
+<ol>
+<li>Изучите правила участия</li>
+<li>Соберите свою команду или присоединяйтесь индивидуально</li>
+<li>Следите за анонсами на корпоративном портале</li>
+<li>Становитесь частью истории успеха РЕСО-Лизинг!</li>
+</ol>`,
+
+        `<h3>Стартует главный конкурс года!</h3>
+<p><strong>2026 год</strong> объявлен годом команды и годом каждого сотрудника — мы запускаем уникальный корпоративный конкурс <strong>«РЕСО — это мы!»</strong>, который объединит всех нас в стремлении к общему успеху.</p>
+<h3>Приглашаем в рабочую группу конкурса</h3>
+<p>Если вы хотите:</p>
+<ul>
+<li>Участвовать в принятии решений вместе с топ-менеджерами</li>
+<li>Внести вклад в развитие корпоративной культуры компании</li>
+</ul>
+<p>— это предложение для вас!</p>
+<h3>Почему стоит присоединиться?</h3>
+<p>Работа в группе — это шанс:</p>
+<ul>
+<li>Увидеть процессы компании изнутри</li>
+<li>Предложить идеи по улучшению командной работы</li>
+<li>Напрямую взаимодействовать с руководством при разработке новых инициатив</li>
+<li>Помочь сделать систему поощрений честной и прозрачной</li>
+</ul>
+<h3>Что будет делать рабочая группа?</h3>
+<ul>
+<li>Собираться и генерировать идеи</li>
+<li>Участвовать в определении лидеров месяца</li>
+</ul>
+<h3>Важные условия участия</h3>
+<ol>
+<li>Участники рабочей группы <strong>не могут участвовать в конкурсах</strong> на получение баллов — чтобы обеспечить объективность оценки.</li>
+<li>В группе может быть <strong>не более 2 человек из одного департамента</strong> — так мы обеспечим разнообразие мнений и справедливое представительство.</li>
+<li>Количество мест ограничено, поэтому, если вы заинтересованы, <strong>не откладывайте решение</strong>!</li>
+</ol>
+<h3>Как присоединиться?</h3>
+<p>Отправьте письмо на адрес: <a href="mailto:aleshina@resoleasing.com">aleshina@resoleasing.com</a></p>
+<p>В сообщении расскажите:</p>
+<ul>
+<li>Почему вы хотите войти в рабочую группу</li>
+<li>Какой опыт поможет вам объективно оценивать задачи (командная работа, проектный опыт, организаторские навыки и т.д.)</li>
+</ul>
+<div class="highlight-box">Творите изменения вместе с нами!</div>`
+    ];
+
+    window.switchAboutTab=function(idx){
+        document.querySelectorAll('.about-contest-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+        document.getElementById('aboutContestBody').innerHTML=aboutContestContent[idx];
+    };
+    switchAboutTab(0);
+    document.getElementById('aboutContestModal').addEventListener('click',e=>{if(e.target===document.getElementById('aboutContestModal'))closeModal('aboutContestModal');});
 
     // ===== INIT =====
     buildBoardTabs();renderBoardRegions();switchView();
