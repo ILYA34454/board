@@ -673,6 +673,7 @@ body {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
+    table-layout: fixed;
 }
 
 /* Header */
@@ -686,6 +687,8 @@ body {
     background: var(--bg-subtle);
     white-space: nowrap;
     border-bottom: 1px solid var(--border-row);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .rating-table thead th .sort-icon {
@@ -712,12 +715,12 @@ body {
 
 .rating-table tbody tr:last-child td { border-bottom: none; }
 
-/* UNIFIED COLUMN WIDTHS — identical for individual & group */
+/* UNIFIED COLUMN WIDTHS — fixed px, table-layout:fixed enforces them */
 .rating-table .col-num        { width: 48px; color: var(--text-secondary); text-align: left; }
-.rating-table .col-name       { width: 25%; font-weight: 500; }
-.rating-table .col-position   { width: 25%; }
-.rating-table .col-dept       { width: 25%; }
-.rating-table .col-score      { width: 25%; text-align: right; font-weight: 500; padding-right: var(--sp-8); }
+.rating-table .col-name       { width: 318px; font-weight: 500; }
+.rating-table .col-position   { width: 318px; }
+.rating-table .col-dept       { width: 318px; }
+.rating-table .col-score      { width: 318px; text-align: right; font-weight: 500; padding-right: var(--sp-8); }
 
 /* Name cell inner layout */
 .rating-table .col-name-inner {
