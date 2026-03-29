@@ -562,7 +562,7 @@ body {
 .score {
     font-size: 14px;
     line-height: var(--leading);
-    font-weight: 400;
+    font-weight: 500;
     white-space: nowrap;
     text-align: right;
 }
@@ -631,7 +631,7 @@ body {
 }
 
 .region-score {
-    font-size: 14px;
+    font-size: 16px;
     line-height: var(--leading);
     font-weight: 500;
     color: var(--text-primary);
@@ -1080,33 +1080,6 @@ body {
 
 .challenge-submit-btn:hover { background: var(--green-dark); }
 
-.participate-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-2);
-    padding: 0 var(--sp-4);
-    height: 38px;
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    font-family: var(--font);
-    transition: all 0.25s ease;
-    background: var(--green-primary);
-    color: var(--white);
-}
-
-.participate-btn:hover { background: var(--green-dark); }
-.participate-btn:active { transform: scale(0.97); }
-
-.participate-btn.joined {
-    background: var(--green-surface);
-    color: var(--green-primary);
-    border: 1px solid var(--green-border);
-    cursor: default;
-    pointer-events: none;
-}
 
 
 /* ── SUCCESS BANNER ────────────────────────────────────────── */
@@ -1270,130 +1243,6 @@ body {
     font-weight: 500;
 }
 .about-contest-body a { color: var(--green-primary); text-decoration: underline; }
-
-
-/* ── TEAM FORM MODAL ───────────────────────────────────────── */
-.team-form-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.4);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(3px);
-}
-
-.team-form-overlay.active { opacity: 1; visibility: visible; }
-
-.team-form-panel {
-    background: var(--white);
-    width: 520px;
-    border-radius: var(--radius-xl);
-    padding: var(--sp-8);
-    position: relative;
-    transform: translateY(30px) scale(0.95);
-    transition: all var(--ease-modal);
-    box-shadow: var(--shadow-modal);
-}
-
-.team-form-overlay.active .team-form-panel { transform: translateY(0) scale(1); }
-
-.team-member-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-3);
-    margin: var(--sp-5) 0;
-}
-
-.team-member-row {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.team-member-row input {
-    flex: 1;
-    padding: 10px 14px;
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-family: var(--font);
-    color: var(--text-primary);
-    background: var(--white);
-    min-width: 0;
-}
-
-.team-member-row input:focus {
-    outline: none;
-    border-color: var(--green-primary);
-    box-shadow: 0 0 0 3px rgba(5, 74, 51, 0.08);
-}
-
-.team-member-row input::placeholder { color: var(--text-placeholder); }
-
-.team-member-num {
-    width: 28px;
-    height: 28px;
-    border-radius: var(--radius-round);
-    background: var(--neutral-100);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    flex-shrink: 0;
-}
-
-.add-member-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    border: 1px dashed var(--border-default);
-    border-radius: var(--radius-sm);
-    background: transparent;
-    color: var(--text-secondary);
-    font-size: 14px;
-    cursor: pointer;
-    font-family: var(--font);
-    transition: all 0.2s ease;
-    width: fit-content;
-}
-
-.add-member-btn:hover {
-    border-color: var(--green-primary);
-    color: var(--green-primary);
-}
-
-
-/* ── FORM ELEMENTS ─────────────────────────────────────────── */
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); }
-
-.form-input {
-    padding: 10px 14px;
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-family: var(--font);
-    color: var(--text-primary);
-    background: var(--white);
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: var(--green-primary);
-    box-shadow: 0 0 0 3px rgba(5, 74, 51, 0.08);
-}
-
-.form-input::placeholder { color: var(--text-placeholder); }
 
 
 /* ── MISC ──────────────────────────────────────────────────── */
