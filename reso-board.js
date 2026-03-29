@@ -483,8 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body.insertAdjacentHTML('beforeend', `<tr>
                 <td class="col-num">${gi + 1}</td>
                 <td class="col-name"><div class="col-name-inner"><div style="display:flex;align-items:center;flex-shrink:0;">${avatarStack}</div><span>${g.name}</span></div></td>
-                <td class="col-position"></td>
-                <td class="col-dept">${memberNames}</td>
+                <td class="col-position" colspan="2">${memberNames}</td>
                 <td class="col-score">${g.score}</td>
             </tr>`);
         });
