@@ -120,7 +120,7 @@
 
     /* Typography */
     --font: 'Golos Text', -apple-system, BlinkMacSystemFont, sans-serif;
-    --leading: 1.4;
+    --leading: 140%;
 
     /* Radii */
     --radius-sm: 6px;
@@ -227,12 +227,12 @@ body {
     font-size: 32px;
     font-weight: 600;
     margin-bottom: var(--sp-3);
-    line-height: 1.2;
+    line-height: 120%;
 }
 
 .banner p {
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 140%;
     color: var(--white);
     max-width: 600px;
 }
@@ -306,7 +306,7 @@ body {
 }
 
 .tab i { font-size: 14px; flex-shrink: 0; }
-.tab .tab-label span { font-size: 14px; font-weight: 500; line-height: 1; }
+.tab .tab-label span { font-size: 14px; font-weight: 500; line-height: 140%; }
 
 
 /* ── MONTH SELECTOR ────────────────────────────────────────── */
@@ -378,7 +378,7 @@ body {
 .section-title {
     font-size: 20px;
     font-weight: 600;
-    line-height: var(--leading);
+    line-height: 130%;
     margin-bottom: var(--sp-8);
     margin-top: 56px;
     color: var(--text-primary);
@@ -899,13 +899,13 @@ body {
 .challenge-intro h2 {
     font-size: 24px;
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 120%;
     margin-bottom: var(--sp-2);
 }
 
 .challenge-intro p {
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 140%;
     opacity: 0.85;
     max-width: 900px;
 }
@@ -979,7 +979,7 @@ body {
 
 .challenge-task {
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 140%;
     color: var(--text-primary);
     margin-bottom: var(--sp-4);
 }
@@ -995,7 +995,7 @@ body {
     align-items: flex-start;
     gap: 10px;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 140%;
     color: var(--text-primary);
 }
 
@@ -1032,8 +1032,8 @@ body {
 }
 
 .challenge-submit-text { flex: 1; }
-.challenge-submit-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 3px; }
-.challenge-submit-sub { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+.challenge-submit-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 3px; line-height: 140%; }
+.challenge-submit-sub { font-size: 14px; color: var(--text-secondary); line-height: 140%; }
 
 
 /* ── BUTTONS ───────────────────────────────────────────────── */
@@ -1110,8 +1110,8 @@ body {
     flex-shrink: 0;
 }
 
-.success-banner-title { font-size: 16px; font-weight: 500; color: var(--green-primary); margin-bottom: 4px; }
-.success-banner-sub { font-size: 14px; color: var(--neutral-600); }
+.success-banner-title { font-size: 16px; font-weight: 500; color: var(--green-primary); margin-bottom: 4px; line-height: 140%; }
+.success-banner-sub { font-size: 14px; color: var(--neutral-600); line-height: 140%; }
 
 .success-banner-close {
     background: none;
@@ -1174,8 +1174,8 @@ body {
 }
 
 .modal-close:hover { color: var(--error); }
-.modal-title { font-size: 16px; font-weight: 600; margin-bottom: var(--sp-2); }
-.modal-text { font-size: 14px; line-height: 1.5; color: var(--text-secondary); margin-bottom: var(--sp-5); }
+.modal-title { font-size: 16px; font-weight: 600; margin-bottom: var(--sp-2); line-height: 140%; }
+.modal-text { font-size: 14px; line-height: 140%; color: var(--text-secondary); margin-bottom: var(--sp-5); }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
 
 
@@ -1189,6 +1189,7 @@ body {
 }
 
 .about-contest-header { padding: var(--sp-6) 28px 0 28px; }
+.about-contest-header .modal-title { line-height: 130%; }
 
 .about-contest-tabs {
     display: flex;
@@ -1227,18 +1228,18 @@ body {
     flex: 1;
 }
 
-.about-contest-body h3 { font-size: 16px; font-weight: 600; margin: 16px 0 8px 0; color: var(--text-primary); }
+.about-contest-body h3 { font-size: 16px; font-weight: 600; margin: 16px 0 8px 0; color: var(--text-primary); line-height: 140%; }
 .about-contest-body h3:first-child { margin-top: 0; }
-.about-contest-body p { font-size: 14px; line-height: 1.7; color: var(--neutral-600); margin-bottom: 8px; }
+.about-contest-body p { font-size: 14px; line-height: 140%; color: var(--neutral-600); margin-bottom: 8px; }
 .about-contest-body ul, .about-contest-body ol { padding-left: 20px; margin-bottom: 16px; }
-.about-contest-body li { font-size: 14px; line-height: 1.7; color: var(--neutral-600); margin-bottom: 4px; }
+.about-contest-body li { font-size: 14px; line-height: 140%; color: var(--neutral-600); margin-bottom: 4px; }
 .about-contest-body .highlight-box {
     background: var(--green-surface);
     border-radius: var(--radius-md);
     padding: 14px 18px;
     margin: 16px 0;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 140%;
     color: var(--green-primary);
     font-weight: 500;
 }
