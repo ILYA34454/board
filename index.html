@@ -43,12 +43,10 @@
         <div id="overallView" style="display:none;">
             <!-- Challenge banner -->
             <div class="challenge-intro" id="challengeIntro">
+                <div class="challenge-deadline"><i class="fas fa-clock"></i> <span id="challengeDeadlineText">Крайний срок: 30 апреля 2026</span></div>
                 <h2 id="challengeTitle">Мастер публичных выступлений</h2>
                 <p id="challengeDesc">Апрельский челлендж — шанс познакомиться ближе! Выступая перед коллегами, каждый сможет раскрыть свои сильные стороны, показать профессиональные навыки и поделиться частичкой своей личности.</p>
-                <div style="display:flex;align-items:center;gap:12px;margin-top:20px;pointer-events:auto;">
-                    <div class="challenge-deadline"><i class="fas fa-clock"></i> <span id="challengeDeadlineText">Крайний срок: 30 апреля 2026</span></div>
-                    <button class="challenge-detail-btn" onclick="document.getElementById('challengeDetailModal').classList.add('active')"><i class="fas fa-arrow-right" style="font-size:12px;"></i> Подробнее</button>
-                </div>
+                <button class="challenge-detail-btn" onclick="document.getElementById('challengeDetailModal').classList.add('active')"><i class="fas fa-arrow-right" style="font-size:12px;"></i> Подробнее</button>
             </div>
 
             <!-- Segmented control -->
@@ -111,7 +109,7 @@
                         <thead><tr>
                             <th class="col-num">№</th>
                             <th class="col-name">Команда</th>
-                            <th class="col-dept">Участники</th>
+                            <th class="col-position" colspan="2">Участники</th>
                             <th class="col-score">Баллы</th>
                         </tr></thead>
                         <tbody id="groupRatingBody"></tbody>
