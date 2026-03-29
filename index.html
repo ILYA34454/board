@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="reso-board.css">
 </head>
-</head>
 <body>
     <main class="main-content" id="boardContent">
         <!-- ═══ HERO BANNER ═══ -->
@@ -180,55 +179,6 @@
                 <button class="about-contest-tab" onclick="switchAboutTab(1)">Рабочая группа</button>
             </div>
             <div class="about-contest-body" id="aboutContestBody"></div>
-        </div>
-    </div>
-
-    <!-- ═══ INDIVIDUAL FORM MODAL ═══ -->
-    <div class="team-form-overlay" id="individualFormOverlay">
-        <div class="team-form-panel">
-            <button class="modal-close" onclick="closeIndividualForm()"><i class="fas fa-times"></i></button>
-            <h3 class="modal-title"><i class="fas fa-user" style="margin-right:8px;color:var(--green-primary);"></i>Заявка на участие</h3>
-            <p class="modal-text">Заполните данные для индивидуального рейтинга</p>
-            <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:24px;">
-                <div class="form-group"><label class="form-label">ФИО</label><input class="form-input" id="indName" placeholder="Иванов Иван Иванович"></div>
-                <div class="form-group"><label class="form-label">Должность</label><input class="form-input" id="indPosition" placeholder="Менеджер по продажам"></div>
-                <div class="form-group"><label class="form-label">Департамент</label>
-                    <select class="form-input" id="indDept" style="cursor:pointer;">
-                        <option value="">Выберите департамент</option>
-                        <option value="Коммерческий деп.">Коммерческий деп.</option>
-                        <option value="Деп. экономической безопасности">Деп. экономической безопасности</option>
-                    </select>
-                </div>
-                <div class="form-group"><label class="form-label">Регион / подразделение</label><input class="form-input" id="indRegion" placeholder="Регион Москва-17"></div>
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="closeIndividualForm()">Отмена</button>
-                <button class="btn btn-primary" onclick="submitIndividualForm()"><i class="fas fa-check"></i> Отправить заявку</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ═══ TEAM FORM MODAL ═══ -->
-    <div class="team-form-overlay" id="teamFormOverlay">
-        <div class="team-form-panel">
-            <button class="modal-close" onclick="closeTeamForm()"><i class="fas fa-times"></i></button>
-            <h3 class="modal-title"><i class="fas fa-users" style="margin-right:8px;color:var(--green-primary);"></i>Заявка на групповое участие</h3>
-            <p class="modal-text">Укажите название команды и участников</p>
-            <div class="form-group" style="margin-bottom:16px;">
-                <label class="form-label">Название команды</label>
-                <input class="form-input" id="teamName" placeholder="Команда «Восток»">
-            </div>
-            <label class="form-label" style="margin-bottom:8px;display:block;">Участники</label>
-            <div class="team-member-inputs" id="teamMemberInputs">
-                <div class="team-member-row"><span class="team-member-num">1</span><input type="text" placeholder="ФИО" class="team-input-name"><input type="text" placeholder="Должность" class="team-input-pos" style="max-width:180px;"></div>
-                <div class="team-member-row"><span class="team-member-num">2</span><input type="text" placeholder="ФИО" class="team-input-name"><input type="text" placeholder="Должность" class="team-input-pos" style="max-width:180px;"></div>
-                <div class="team-member-row"><span class="team-member-num">3</span><input type="text" placeholder="ФИО" class="team-input-name"><input type="text" placeholder="Должность" class="team-input-pos" style="max-width:180px;"></div>
-            </div>
-            <button class="add-member-btn" onclick="addTeamMemberRow()"><i class="fas fa-plus"></i> Добавить участника</button>
-            <div class="modal-actions" style="margin-top:24px;">
-                <button class="btn btn-secondary" onclick="closeTeamForm()">Отмена</button>
-                <button class="btn btn-primary" onclick="submitTeamForm()"><i class="fas fa-check"></i> Отправить заявку</button>
-            </div>
         </div>
     </div>
 
