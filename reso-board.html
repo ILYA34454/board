@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доска почёта — РЕСО-Лизинг</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="reso-board.css">
+</head>
+</head>
+<body>
+    <main class="main-content" id="boardContent">
+        <!-- ═══ HERO BANNER ═══ -->
+        <div class="banner">
+            <div class="banner-content">
+                <div class="breadcrumbs">Главная &gt; Доска почёта</div>
+                <h1>Лучшие сотрудники 2026</h1>
+                <p>Здесь мы отмечаем тех, кто показывает лучшие результаты. Выберите департамент, чтобы увидеть подробности.</p>
+                <button class="btn-about-contest" onclick="document.getElementById('aboutContestModal').classList.add('active')">О конкурсе</button>
+            </div>
+        </div>
+
+        <!-- ═══ TOP BAR ═══ -->
+        <div class="top-bar-row">
+            <div class="tabs-wrapper" id="tabsWrapper"></div>
+            <div class="month-select-box" id="monthSelectBox">
+                <span id="monthSelectText">Апрель 2026</span>
+                <i class="fas fa-chevron-down" style="font-size:12px;color:var(--text-secondary);"></i>
+                <div class="month-select-dropdown" id="monthSelectDropdown"></div>
+            </div>
+        </div>
+
+        <!-- ═══ DEPT VIEW (nominations + regions) ═══ -->
+        <div id="deptView">
+            <div id="nomSections"></div>
+            <h2 class="section-title" id="regionsTitle">
+                <img src="data:image/jpeg;base64,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" alt="">
+                Регионы-лидеры продаж
+            </h2>
+            <div class="regions-grid" id="regionsGrid"></div>
+        </div>
+
+        <!-- ═══ OVERALL VIEW (individual + group ratings) ═══ -->
+        <div id="overallView" style="display:none;">
+            <!-- Challenge banner -->
+            <div class="challenge-intro" id="challengeIntro">
+                <h2 id="challengeTitle">Мастер публичных выступлений</h2>
+                <p id="challengeDesc">Апрельский челлендж — шанс познакомиться ближе! Выступая перед коллегами, каждый сможет раскрыть свои сильные стороны, показать профессиональные навыки и поделиться частичкой своей личности.</p>
+                <div style="display:flex;align-items:center;gap:12px;margin-top:20px;pointer-events:auto;">
+                    <div class="challenge-deadline"><i class="fas fa-clock"></i> <span id="challengeDeadlineText">Крайний срок: 30 апреля 2026</span></div>
+                    <button class="challenge-detail-btn" onclick="document.getElementById('challengeDetailModal').classList.add('active')"><i class="fas fa-arrow-right" style="font-size:12px;"></i> Подробнее</button>
+                </div>
+            </div>
+
+            <!-- Segmented control -->
+            <div style="margin-bottom:24px;">
+                <div class="sub-toggle" id="subToggle">
+                    <button class="sub-toggle-btn active" data-sub="individual"><i class="fas fa-user" style="font-size:12px;margin-right:7px;"></i>Индивидуальный рейтинг</button>
+                    <button class="sub-toggle-btn" data-sub="group"><i class="fas fa-users" style="font-size:12px;margin-right:7px;"></i>Групповой рейтинг</button>
+                </div>
+            </div>
+
+            <!-- Individual rating table -->
+            <div id="individualSection">
+                <div class="success-banner" id="individualSuccessBanner">
+                    <div class="success-banner-icon"><i class="fas fa-check"></i></div>
+                    <div class="success-banner-text">
+                        <div class="success-banner-title">Поздравляем! Ты в игре</div>
+                        <div class="success-banner-sub">Результаты будут отображаться в таблице ниже по итогам месяца</div>
+                    </div>
+                    <button class="success-banner-close" onclick="document.getElementById('individualSuccessBanner').classList.remove('show')"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="rating-table-wrap">
+                    <table class="rating-table individual-table" id="ratingTable">
+                        <thead><tr>
+                            <th class="col-num">№</th>
+                            <th class="col-name">Сотрудник <i class="fas fa-chevron-down sort-icon"></i></th>
+                            <th class="col-position">Должность</th>
+                            <th class="col-dept">Департамент <i class="fas fa-chevron-down sort-icon"></i></th>
+                            <th class="col-score">Баллы</th>
+                        </tr></thead>
+                        <tbody id="ratingBody"></tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <div class="table-footer-info" id="tableFooterInfo">Показано 1–10 из 15</div>
+                    <div class="table-footer-right">
+                        <div class="page-size-select">Записей на странице&nbsp;
+                            <select id="pageSizeSelect">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="25">25</option>
+                            </select>
+                        </div>
+                        <div class="pagination" id="tablePagination"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group rating table -->
+            <div id="groupSection" style="display:none;">
+                <div class="success-banner" id="groupSuccessBanner">
+                    <div class="success-banner-icon"><i class="fas fa-users"></i></div>
+                    <div class="success-banner-text">
+                        <div class="success-banner-title">Команда зарегистрирована!</div>
+                        <div class="success-banner-sub" id="groupSuccessSub">Ваша заявка принята. Удачи в соревновании!</div>
+                    </div>
+                    <button class="success-banner-close" onclick="document.getElementById('groupSuccessBanner').classList.remove('show')"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="rating-table-wrap">
+                    <table class="rating-table group-table" id="groupRatingTable">
+                        <thead><tr>
+                            <th class="col-num">№</th>
+                            <th class="col-name">Команда</th>
+                            <th class="col-dept">Участники</th>
+                            <th class="col-score">Баллы</th>
+                        </tr></thead>
+                        <tbody id="groupRatingBody"></tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <div class="table-footer-info" id="groupTableFooterInfo"></div>
+                    <div style="flex:1;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ═══ CHALLENGE DETAIL MODAL ═══ -->
+    <div class="modal-overlay" id="challengeDetailModal">
+        <div class="modal-content" style="width:600px;max-height:80vh;overflow-y:auto;">
+            <button class="modal-close" onclick="closeModal('challengeDetailModal')"><i class="fas fa-times"></i></button>
+            <h3 class="modal-title" id="challengeModalTitle">Мастер публичных выступлений</h3>
+            <p class="modal-text" id="challengeModalDesc">Апрельский челлендж — шанс познакомиться ближе и раскрыть свои таланты перед коллегами.</p>
+            <div id="challengeModalBody">
+                <div class="challenge-cards-row" style="margin-bottom:16px;">
+                    <div class="challenge-card">
+                        <div class="challenge-card-header"><span class="challenge-card-title">Индивидуальный челлендж</span></div>
+                        <div class="challenge-card-body">
+                            <div class="challenge-task">Создайте <strong>3-минутное видео</strong> «Как моя работа влияет на успех компании».</div>
+                            <div class="challenge-points">
+                                <div class="challenge-point"><div class="challenge-point-dot"></div><span>Ключевые этапы карьеры</span></div>
+                                <div class="challenge-point"><div class="challenge-point-dot"></div><span>Конкретные проекты и результаты</span></div>
+                                <div class="challenge-point"><div class="challenge-point-dot"></div><span>Личные качества и навыки</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="challenge-card">
+                        <div class="challenge-card-header"><span class="challenge-card-title">Командный челлендж</span></div>
+                        <div class="challenge-card-body">
+                            <div class="challenge-task">Подготовьте <strong>3-минутное видео</strong> командой по одной из двух тем.</div>
+                            <div class="challenge-points">
+                                <div class="challenge-point"><div class="challenge-point-dot"></div><span>Бизнес-прогноз в стиле новостного выпуска</span></div>
+                                <div class="challenge-point"><div class="challenge-point-dot"></div><span>История компании через яркие эпохи</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="challenge-submit">
+                    <div class="challenge-submit-icon"><i class="fas fa-paper-plane"></i></div>
+                    <div class="challenge-submit-text">
+                        <div class="challenge-submit-title">Как отправить?</div>
+                        <div class="challenge-submit-sub">Загрузите на Яндекс Диск и пришлите ссылку до 30 апреля.</div>
+                    </div>
+                    <a href="mailto:aleshina@resoleasing.com" class="challenge-submit-btn"><i class="fas fa-envelope"></i> Написать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ ABOUT CONTEST MODAL ═══ -->
+    <div class="modal-overlay about-contest-modal" id="aboutContestModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('aboutContestModal')"><i class="fas fa-times"></i></button>
+            <div class="about-contest-header">
+                <h3 class="modal-title" style="font-size:20px;margin-bottom:0;">О конкурсе «РЕСО — это мы!»</h3>
+            </div>
+            <div class="about-contest-tabs">
+                <button class="about-contest-tab active" onclick="switchAboutTab(0)">Для участников</button>
+                <button class="about-contest-tab" onclick="switchAboutTab(1)">Рабочая группа</button>
+            </div>
+            <div class="about-contest-body" id="aboutContestBody"></div>
+        </div>
+    </div>
+
+    <!-- ═══ INDIVIDUAL FORM MODAL ═══ -->
+    <div class="team-form-overlay" id="individualFormOverlay">
+        <div class="team-form-panel">
+            <button class="modal-close" onclick="closeIndividualForm()"><i class="fas fa-times"></i></button>
+            <h3 class="modal-title"><i class="fas fa-user" style="margin-right:8px;color:var(--green-primary);"></i>Заявка на участие</h3>
+            <p class="modal-text">Заполните данные для индивидуального рейтинга</p>
+            <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:24px;">
+                <div class="form-group"><label class="form-label">ФИО</label><input class="form-input" id="indName" placeholder="Иванов Иван Иванович"></div>
+                <div class="form-group"><label class="form-label">Должность</label><input class="form-input" id="indPosition" placeholder="Менеджер по продажам"></div>
+                <div class="form-group"><label class="form-label">Департамент</label>
+                    <select class="form-input" id="indDept" style="cursor:pointer;">
+                        <option value="">Выберите департамент</option>
+                        <option value="Коммерческий деп.">Коммерческий деп.</option>
+                        <option value="Деп. экономической безопасности">Деп. экономической безопасности</option>
+                    </select>
+                </div>
+                <div class="form-group"><label class="form-label">Регион / подразделение</label><input class="form-input" id="indRegion" placeholder="Регион Москва-17"></div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeIndividualForm()">Отмена</button>
+                <button class="btn btn-primary" onclick="submitIndividualForm()"><i class="fas fa-check"></i> Отправить заявку</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ TEAM FORM MODAL ═══ -->
+    <div class="team-form-overlay" id="teamFormOverlay">
+        <div class="team-form-panel">
+            <button class="modal-close" onclick="closeTeamForm()"><i class="fas fa-times"></i></button>
+            <h3 class="modal-title"><i class="fas fa-users" style="margin-right:8px;color:var(--green-primary);"></i>Заявка на групповое участие</h3>
+            <p class="modal-text">Укажите название команды и участников</p>
+            <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label">Название команды</label>
+                <input class="form-input" id="teamName" placeholder="Команда «Восток»">
+            </div>
+            <label class="form-label" style="margin-bottom:8px;display:block;">Участники</label>
+            <div class="team-member-inputs" id="teamMemberInputs">
+                <div class="team-member-row"><span class="team-member-num">1</span><input type="text" placeholder="ФИО" class="team-input-name"><input type="text" placeholder="Должность" class="team-input-pos" style="max-width:180px;"></div>
+                <div class="team-member-row"><span class="team-member-num">2</span><input type="text" placeholder="ФИО" class="team-input-name"><input type="text" placeholder="Должность" class="team-input-pos" style="max-width:180px;"></div>
+                <div class="team-member-row"><span class="team-member-num">3</span><input type="text" placeholder="ФИО" class="team-input-name"><input type="text" placeholder="Должность" class="team-input-pos" style="max-width:180px;"></div>
+            </div>
+            <button class="add-member-btn" onclick="addTeamMemberRow()"><i class="fas fa-plus"></i> Добавить участника</button>
+            <div class="modal-actions" style="margin-top:24px;">
+                <button class="btn btn-secondary" onclick="closeTeamForm()">Отмена</button>
+                <button class="btn btn-primary" onclick="submitTeamForm()"><i class="fas fa-check"></i> Отправить заявку</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT — DATA & LOGIC
+     Structured for easy Bitrix integration.
+     
+     To update nominees: edit the MONTH_DATA object below.
+     Each month (0–11) maps to nomination and rating data.
+     ═══════════════════════════════════════════════════════════ -->
+<script src="reso-board.js"></script>
+</body>
+</html>
