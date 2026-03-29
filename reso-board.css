@@ -234,7 +234,7 @@ body {
     font-size: 16px;
     line-height: 140%;
     color: var(--white);
-    max-width: 600px;
+    max-width: 800px;
 }
 
 .btn-about-contest {
@@ -562,7 +562,7 @@ body {
 .score {
     font-size: 14px;
     line-height: var(--leading);
-    font-weight: 500;
+    font-weight: 400;
     white-space: nowrap;
     text-align: right;
 }
@@ -664,7 +664,6 @@ body {
    proportions for visual alignment when switching views.
    ──────────────────────────────────────────────────────────── */
 .rating-table-wrap {
-    margin-bottom: var(--sp-8);
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: var(--shadow-card);
@@ -678,7 +677,7 @@ body {
 
 /* Header */
 .rating-table thead th {
-    padding: 0 var(--sp-4);
+    padding: 0 var(--sp-6);
     height: 48px;
     font-size: 14px;
     font-weight: 500;
@@ -704,7 +703,7 @@ body {
 .rating-table tbody tr:hover { background: var(--bg-subtle); }
 
 .rating-table tbody td {
-    padding: var(--sp-4);
+    padding: var(--sp-4) var(--sp-6);
     font-size: 14px;
     border-bottom: 1px solid var(--border-row);
     vertical-align: middle;
@@ -713,17 +712,12 @@ body {
 
 .rating-table tbody tr:last-child td { border-bottom: none; }
 
-/* UNIFIED COLUMN WIDTHS — shared between individual & group */
-.rating-table .col-num        { width: 80px; color: var(--text-secondary); text-align: center; }
+/* UNIFIED COLUMN WIDTHS — identical for individual & group */
+.rating-table .col-num        { width: 64px; color: var(--text-secondary); text-align: center; padding-left: var(--sp-4); padding-right: var(--sp-2); }
 .rating-table .col-name       { width: 25%; font-weight: 500; }
-.rating-table .col-position   { width: 22%; }
-.rating-table .col-dept       { width: 28%; }
-.rating-table .col-score      { width: 18%; text-align: right; font-weight: 500; }
-
-/* Group table — participants col replaces position + dept */
-.rating-table.group-table .col-name  { width: 25%; }
-.rating-table.group-table .col-dept  { width: 53%; color: var(--text-primary); }
-.rating-table.group-table .col-score { width: 18%; }
+.rating-table .col-position   { width: 22%; color: var(--text-secondary); }
+.rating-table .col-dept       { width: 30%; color: var(--text-secondary); }
+.rating-table .col-score      { width: 12%; text-align: right; font-weight: 500; padding-right: var(--sp-8); }
 
 /* Name cell inner layout */
 .rating-table .col-name-inner {
@@ -749,6 +743,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: var(--sp-4) var(--sp-4);
+    margin-top: var(--sp-4);
     font-size: 14px;
     color: var(--text-secondary);
 }
@@ -864,7 +859,7 @@ body {
 /* ── CHALLENGE SECTION ─────────────────────────────────────── */
 .challenge-intro {
     border-radius: 14px;
-    padding: var(--sp-8) 36px;
+    padding: var(--sp-10) var(--sp-10);
     margin-bottom: var(--sp-8);
     background: linear-gradient(135deg, #1a2f3a 0%, #1e3d4f 60%, #235265 100%);
     color: var(--white);
@@ -914,31 +909,34 @@ body {
     display: inline-flex;
     align-items: center;
     gap: var(--sp-2);
-    margin-top: var(--sp-4);
     font-size: 12px;
     font-weight: 500;
     background: rgba(255,255,255,0.15);
-    border-radius: var(--radius-md);
-    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+    margin-bottom: var(--sp-4);
 }
 
 .challenge-detail-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 7px;
-    padding: 7px 16px;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0 24px;
+    height: 40px;
+    background: var(--white);
+    border: none;
     border-radius: var(--radius-md);
-    color: var(--white);
-    font-size: 12px;
+    color: var(--text-primary);
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     font-family: var(--font);
     transition: background 0.2s;
+    margin-top: var(--sp-5);
 }
 
-.challenge-detail-btn:hover { background: rgba(255,255,255,0.25); }
+.challenge-detail-btn:hover { background: var(--neutral-100); }
 
 .challenge-cards-row {
     display: grid;
