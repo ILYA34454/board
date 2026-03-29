@@ -150,9 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let tableSortDir = 1;
     let tablePage = 1;
     let tablePageSize = 10;
-    let individualJoined = false;
-    let groupJoined = false;
-    let teamMemberCount = 3;
 
 
     /* ══════════════════════════════════════════════════════════
@@ -507,82 +504,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('groupSection').style.display = sub === 'group' ? '' : 'none';
         });
     });
-
-
-    /* ══════════════════════════════════════════════════════════
-       PARTICIPATE FORMS
-       ══════════════════════════════════════════════════════════ */
-    window.openIndividualForm = function() {
-        if (individualJoined) return;
-        document.getElementById('individualFormOverlay').classList.add('active');
-    };
-
-    window.closeIndividualForm = function() {
-        document.getElementById('individualFormOverlay').classList.remove('active');
-    };
-
-    document.getElementById('individualFormOverlay').addEventListener('click', e => {
-        if (e.target === document.getElementById('individualFormOverlay')) closeIndividualForm();
-    });
-
-    window.submitIndividualForm = function() {
-        const name = document.getElementById('indName').value.trim();
-        const pos = document.getElementById('indPosition').value.trim();
-        const dept = document.getElementById('indDept').value;
-        if (!name) { showToast('Укажите ФИО'); return; }
-        if (!pos) { showToast('Укажите должность'); return; }
-        if (!dept) { showToast('Выберите департамент'); return; }
-        individualJoined = true;
-        const btn = document.getElementById('btnParticipateIndividual');
-        if (btn) { btn.classList.add('joined'); btn.innerHTML = '<i class="fas fa-check-circle"></i> Вы участвуете'; }
-        document.getElementById('individualSuccessBanner').classList.add('show');
-        showFormSuccess('individualFormOverlay', 'Поздравляем, ты в игре!', 'Результаты будут отображаться в таблице по итогам месяца', closeIndividualForm);
-    };
-
-    window.openTeamForm = function() {
-        if (groupJoined) return;
-        document.getElementById('teamFormOverlay').classList.add('active');
-    };
-
-    window.closeTeamForm = function() {
-        document.getElementById('teamFormOverlay').classList.remove('active');
-    };
-
-    document.getElementById('teamFormOverlay').addEventListener('click', e => {
-        if (e.target === document.getElementById('teamFormOverlay')) closeTeamForm();
-    });
-
-    window.addTeamMemberRow = function() {
-        teamMemberCount++;
-        const row = document.createElement('div');
-        row.className = 'team-member-row';
-        row.innerHTML = `<span class="team-member-num">${teamMemberCount}</span><input type="text" placeholder="ФИО" class="team-input-name"><input type="text" placeholder="Должность" class="team-input-pos" style="max-width:180px;">`;
-        document.getElementById('teamMemberInputs').appendChild(row);
-    };
-
-    window.submitTeamForm = function() {
-        const teamName = document.getElementById('teamName').value.trim();
-        if (!teamName) { showToast('Укажите название команды'); return; }
-        const names = [];
-        document.querySelectorAll('.team-input-name').forEach(inp => { const v = inp.value.trim(); if (v) names.push(v); });
-        if (names.length < 2) { showToast('Укажите минимум 2 участников'); return; }
-        groupJoined = true;
-        const btn = document.getElementById('btnParticipateGroup');
-        if (btn) { btn.classList.add('joined'); btn.innerHTML = '<i class="fas fa-check-circle"></i> Вы участвуете'; }
-        document.getElementById('groupSuccessSub').textContent = teamName + ': ' + names.join(', ');
-        document.getElementById('groupSuccessBanner').classList.add('show');
-        showFormSuccess('teamFormOverlay', 'Команда зарегистрирована!', `Команда «${teamName}»: ${names.join(', ')}`, closeTeamForm);
-    };
-
-    function showFormSuccess(overlayId, title, subtitle, closeFn) {
-        const panel = document.querySelector(`#${overlayId} .team-form-panel`);
-        panel.innerHTML = `<div style="text-align:center;padding:40px 20px;">
-            <div style="width:64px;height:64px;border-radius:50%;background:var(--green-primary);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;"><i class="fas fa-check"></i></div>
-            <h3 style="font-size:20px;font-weight:600;margin-bottom:8px;color:var(--green-primary);">${title}</h3>
-            <p style="font-size:14px;color:var(--text-secondary);margin-bottom:24px;">${subtitle}</p>
-            <button class="btn btn-primary" onclick="${closeFn.name}()" style="margin:0 auto;">Отлично</button>
-        </div>`;
-    }
 
 
     /* ══════════════════════════════════════════════════════════
