@@ -1,0 +1,150 @@
+{
+    "_comment": "РЕСО-Лизинг — Доска почёта. Данные по месяцам. Ключ = номер месяца (0=Январь, 11=Декабрь).",
+
+    "monthData": {
+        "3": {
+            "commercial": [
+                {
+                    "title": "Среди сотрудников",
+                    "nominees": [
+                        { "name": "Абдумалиева Фарангиз", "dept": "Директор по продажам", "val": "21 231 000 ₽", "img": "https://randomuser.me/api/portraits/women/44.jpg" },
+                        { "name": "Смазливенький Антон",   "dept": "Старший менеджер",     "val": "18 740 000 ₽", "img": "https://randomuser.me/api/portraits/men/32.jpg" },
+                        { "name": "Успехов Александр",     "dept": "Менеджер по продажам", "val": "16 520 000 ₽", "img": "https://randomuser.me/api/portraits/men/46.jpg" }
+                    ]
+                },
+                {
+                    "title": "Среди директоров",
+                    "nominees": [
+                        { "name": "Кузнецова Ольга",    "dept": "Менеджер по продажам", "val": "82%", "img": "https://randomuser.me/api/portraits/women/26.jpg" },
+                        { "name": "Петров Дмитрий",     "dept": "Старший менеджер",     "val": "76%", "img": "https://randomuser.me/api/portraits/men/52.jpg" },
+                        { "name": "Волкова Екатерина",   "dept": "Менеджер по продажам", "val": "70%", "img": "https://randomuser.me/api/portraits/women/58.jpg" }
+                    ]
+                },
+                {
+                    "title": "Среди сотрудников",
+                    "nominees": [
+                        { "name": "Романов Игорь",      "dept": "Ведущий менеджер",     "val": "24 800 000 ₽", "img": "https://randomuser.me/api/portraits/men/15.jpg" },
+                        { "name": "Белова Марина",      "dept": "Менеджер по продажам", "val": "22 150 000 ₽", "img": "https://randomuser.me/api/portraits/women/33.jpg" },
+                        { "name": "Тарасов Михаил",     "dept": "Менеджер по продажам", "val": "19 600 000 ₽", "img": "https://randomuser.me/api/portraits/men/64.jpg" }
+                    ]
+                },
+                {
+                    "title": "Среди директоров",
+                    "nominees": [
+                        { "name": "Назарова Алина",     "dept": "Менеджер по доп. услугам", "val": "8 450 000 ₽", "img": "https://randomuser.me/api/portraits/women/12.jpg" },
+                        { "name": "Григорьев Павел",    "dept": "Старший менеджер",         "val": "7 320 000 ₽", "img": "https://randomuser.me/api/portraits/men/28.jpg" },
+                        { "name": "Соколова Дарья",     "dept": "Менеджер по доп. услугам", "val": "6 180 000 ₽", "img": "https://randomuser.me/api/portraits/women/47.jpg" }
+                    ]
+                }
+            ],
+            "security": [
+                {
+                    "title": "Лучший аналитик рисков",
+                    "nominees": [
+                        { "name": "Соколов Михаил",     "dept": "Старший специалист",     "val": "52 проверки", "img": "https://randomuser.me/api/portraits/men/15.jpg" },
+                        { "name": "Фролова Арина",      "dept": "Аналитик рисков",        "val": "47 проверок", "img": "https://randomuser.me/api/portraits/women/8.jpg" },
+                        { "name": "Баранов Кирилл",     "dept": "Старший специалист",     "val": "41 проверка", "img": "https://randomuser.me/api/portraits/men/41.jpg" }
+                    ]
+                },
+                {
+                    "title": "Предотвращение потерь",
+                    "nominees": [
+                        { "name": "Фролова Арина",      "dept": "Аналитик рисков",        "val": "6 400 000 ₽", "img": "https://randomuser.me/api/portraits/women/8.jpg" },
+                        { "name": "Соколов Михаил",     "dept": "Старший специалист",     "val": "5 700 000 ₽", "img": "https://randomuser.me/api/portraits/men/15.jpg" },
+                        { "name": "Жуков Владимир",     "dept": "Руководитель СБ",       "val": "4 500 000 ₽", "img": "https://randomuser.me/api/portraits/men/7.jpg" }
+                    ]
+                },
+                {
+                    "title": "Скорость реагирования",
+                    "nominees": [
+                        { "name": "Жуков Владимир",     "dept": "Руководитель СБ",       "val": "0.8 ч.", "img": "https://randomuser.me/api/portraits/men/7.jpg" },
+                        { "name": "Соколов Михаил",     "dept": "Старший специалист",     "val": "1.1 ч.", "img": "https://randomuser.me/api/portraits/men/15.jpg" },
+                        { "name": "Фролова Арина",      "dept": "Аналитик рисков",        "val": "1.4 ч.", "img": "https://randomuser.me/api/portraits/women/8.jpg" }
+                    ]
+                },
+                {
+                    "title": "Качество отчётности",
+                    "nominees": [
+                        { "name": "Баранов Кирилл",     "dept": "Старший специалист",     "val": "97%", "img": "https://randomuser.me/api/portraits/men/41.jpg" },
+                        { "name": "Соколов Михаил",     "dept": "Старший специалист",     "val": "94%", "img": "https://randomuser.me/api/portraits/men/15.jpg" },
+                        { "name": "Фролова Арина",      "dept": "Аналитик рисков",        "val": "91%", "img": "https://randomuser.me/api/portraits/women/8.jpg" }
+                    ]
+                }
+            ],
+            "regions": [
+                { "name": "Москва-17",           "value": "21 231 000 ₽", "boss": "Авганов Александр", "img": "https://randomuser.me/api/portraits/men/75.jpg" },
+                { "name": "Санкт-Петербург",      "value": "18 450 000 ₽", "boss": "Смирнова Анна",    "img": "https://randomuser.me/api/portraits/women/65.jpg" },
+                { "name": "Казань-Центр",          "value": "15 120 000 ₽", "boss": "Иванов Сергей",    "img": "https://randomuser.me/api/portraits/men/41.jpg" }
+            ]
+        }
+    },
+
+    "overallIndividual": {
+        "3": [
+            { "name": "Соколов Михаил",        "position": "Старший специалист",       "dept": "Деп. экономической безопасности",   "score": "1 240", "img": "https://randomuser.me/api/portraits/men/15.jpg" },
+            { "name": "Шарапов Андрей",        "position": "Руководитель департамента", "dept": "Коммерческий департамент",          "score": "1 185", "img": "https://randomuser.me/api/portraits/men/32.jpg" },
+            { "name": "Абдумалиева Фарангиз",  "position": "Директор по продажам",     "dept": "Коммерческий департамент",          "score": "1 120", "img": "https://randomuser.me/api/portraits/women/44.jpg" },
+            { "name": "Васильков Евгений",     "position": "Менеджер по продажам",     "dept": "Деп. экономической безопасности",   "score": "1 070", "img": "https://randomuser.me/api/portraits/men/46.jpg" },
+            { "name": "Лебедева Светлана",     "position": "Менеджер по продажам",     "dept": "Коммерческий департамент",          "score": "990",   "img": "https://randomuser.me/api/portraits/women/26.jpg" },
+            { "name": "Фролова Арина",         "position": "Аналитик рисков",          "dept": "Деп. экономической безопасности",   "score": "945",   "img": "https://randomuser.me/api/portraits/women/8.jpg" },
+            { "name": "Гуськин Александр",     "position": "Менеджер по продажам",     "dept": "Коммерческий департамент",          "score": "910",   "img": "https://randomuser.me/api/portraits/men/64.jpg" },
+            { "name": "Комарова Анна",         "position": "Менеджер по продажам",     "dept": "Деп. экономической безопасности",   "score": "870",   "img": "https://randomuser.me/api/portraits/women/44.jpg" },
+            { "name": "Баранов Кирилл",        "position": "Старший специалист",       "dept": "Деп. экономической безопасности",   "score": "840",   "img": "https://randomuser.me/api/portraits/men/41.jpg" },
+            { "name": "Грязнова Александра",   "position": "Менеджер по продажам",     "dept": "Коммерческий департамент",          "score": "810",   "img": "https://randomuser.me/api/portraits/women/33.jpg" },
+            { "name": "Андреев Артём",         "position": "Менеджер по продажам",     "dept": "Коммерческий департамент",          "score": "775",   "img": "https://randomuser.me/api/portraits/men/7.jpg" },
+            { "name": "Кузнецова Ольга",       "position": "Менеджер по продажам",     "dept": "Коммерческий департамент",          "score": "740",   "img": "https://randomuser.me/api/portraits/women/58.jpg" },
+            { "name": "Петров Дмитрий",        "position": "Старший менеджер",         "dept": "Коммерческий департамент",          "score": "705",   "img": "https://randomuser.me/api/portraits/men/52.jpg" },
+            { "name": "Глупышко Сергей",       "position": "Менеджер по продажам",     "dept": "Деп. экономической безопасности",   "score": "670",   "img": "https://randomuser.me/api/portraits/men/10.jpg" },
+            { "name": "Шишка Вячеслав",        "position": "Менеджер по продажам",     "dept": "Коммерческий департамент",          "score": "635",   "img": "https://randomuser.me/api/portraits/men/28.jpg" }
+        ]
+    },
+
+    "overallGroups": {
+        "3": [
+            {
+                "name": "Команда «Москва-Центр»",
+                "score": "3 640",
+                "members": [
+                    { "name": "Абдумалиева Фарангиз", "img": "https://randomuser.me/api/portraits/women/44.jpg" },
+                    { "name": "Романов Игорь",         "img": "https://randomuser.me/api/portraits/men/15.jpg" },
+                    { "name": "Смазливенький Антон",   "img": "https://randomuser.me/api/portraits/men/32.jpg" }
+                ]
+            },
+            {
+                "name": "Команда «Северо-Запад»",
+                "score": "3 210",
+                "members": [
+                    { "name": "Белова Марина",   "img": "https://randomuser.me/api/portraits/women/33.jpg" },
+                    { "name": "Тарасов Михаил",  "img": "https://randomuser.me/api/portraits/men/64.jpg" },
+                    { "name": "Петров Дмитрий",  "img": "https://randomuser.me/api/portraits/men/52.jpg" }
+                ]
+            },
+            {
+                "name": "Команда «Безопасность+»",
+                "score": "2 980",
+                "members": [
+                    { "name": "Жуков Владимир",  "img": "https://randomuser.me/api/portraits/men/7.jpg" },
+                    { "name": "Фролова Арина",   "img": "https://randomuser.me/api/portraits/women/8.jpg" },
+                    { "name": "Баранов Кирилл",  "img": "https://randomuser.me/api/portraits/men/10.jpg" }
+                ]
+            },
+            {
+                "name": "Команда «Юг»",
+                "score": "2 750",
+                "members": [
+                    { "name": "Кузнецова Ольга",     "img": "https://randomuser.me/api/portraits/women/26.jpg" },
+                    { "name": "Успехов Александр",   "img": "https://randomuser.me/api/portraits/men/46.jpg" },
+                    { "name": "Соколова Дарья",      "img": "https://randomuser.me/api/portraits/women/47.jpg" }
+                ]
+            }
+        ]
+    },
+
+    "challenges": {
+        "3": {
+            "title": "Мастер публичных выступлений",
+            "desc": "Апрельский челлендж — шанс познакомиться ближе! Выступая перед коллегами, каждый сможет раскрыть свои сильные стороны, показать профессиональные навыки и поделиться частичкой своей личности.",
+            "deadline": "30 апреля 2026"
+        }
+    }
+}
