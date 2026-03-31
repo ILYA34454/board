@@ -22,8 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const NOM_METRICS = {
-        commercial: ['Процент выполнения личного плана', 'Процент выполнения плана подразделения', 'Объём сделок с маржой не ниже 80% от 7,5', 'Выполнение плана подразделения в %'],
-        security:   ['Кол-во выявленных рисков', 'Сумма предотвращённых потерь', 'Среднее время реагирования', 'Оценка качества отчётов']
+        commercial: [
+            'Процент выполнения личного плана от 75%',
+            'Процент выполнения плана подразделения от 75%, мин. план из расчёта коэфф. штата ≥ 3',
+            'Личный объём продаж накопительным итогом',
+            'Объём продаж подразделения накопительным итогом, мин. план из расчёта коэфф. штата ≥ 3'
+        ],
+        security: ['Кол-во выявленных рисков', 'Сумма предотвращённых потерь', 'Среднее время реагирования', 'Оценка качества отчётов']
     };
 
     const NOM_GROUPS = {
@@ -139,9 +144,12 @@ document.addEventListener('DOMContentLoaded', () => {
        ══════════════════════════════════════════════════════════ */
     function updateChallenge() {
         const ch = CHALLENGES[selectedMonth] || CHALLENGES[CURRENT_MONTH];
+        if (!ch) {
+            document.getElementById('challengeIntro').style.display = 'none';
+            return;
+        }
+        document.getElementById('challengeIntro').style.display = '';
         document.getElementById('challengeTitle').textContent = ch.title;
-        document.getElementById('challengeDesc').textContent = ch.desc;
-        document.getElementById('challengeDeadlineText').textContent = 'Крайний срок: ' + ch.deadline;
         document.getElementById('challengeModalTitle').textContent = ch.title;
     }
 
@@ -519,6 +527,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === document.getElementById('aboutContestModal')) closeModal('aboutContestModal');
     });
 
+    document.getElementById('participateModal').addEventListener('click', e => {
+        if (e.target === document.getElementById('participateModal')) closeModal('participateModal');
+    });
+
+    document.getElementById('challengeDetailModal').addEventListener('click', e => {
+        if (e.target === document.getElementById('challengeDetailModal')) closeModal('challengeDetailModal');
+    });
+
 
     /* ══════════════════════════════════════════════════════════
        INIT — Load data from JSON, then render
@@ -555,4 +571,104 @@ function showToast(text) {
     t.textContent = text;
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+/* ── PARTICIPATE MODAL ─────────────────────────────────────── */
+function switchParticipateTab(mode) {
+    document.querySelectorAll('#participateToggle .sub-toggle-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.mode === mode);
+    });
+    document.getElementById('participateIndividual').style.display = mode === 'individual' ? '' : 'none';
+    document.getElementById('participateGroup').style.display = mode === 'group' ? '' : 'none';
+}
+
+let groupMemberCount = 3;
+
+function addGroupMember() {
+    if (groupMemberCount >= 5) { showToast('Максимум 5 участников в команде'); return; }
+    groupMemberCount++;
+    const container = document.getElementById('groupMembersContainer');
+    const row = document.createElement('div');
+    row.className = 'form-group-row';
+    row.innerHTML = `<label class="form-label">Участник ${groupMemberCount}</label>
+        <input type="text" class="form-input group-member-name" placeholder="Фамилия Имя">
+        <input type="text" class="form-input group-member-dept" placeholder="Департамент">`;
+    container.appendChild(row);
+}
+
+function submitIndividual() {
+    const name = document.getElementById('indivName').value.trim();
+    const position = document.getElementById('indivPosition').value.trim();
+    const dept = document.getElementById('indivDept').value.trim();
+    const link = document.getElementById('indivLink').value.trim();
+
+    if (!name || !position || !dept) {
+        showToast('Заполните все обязательные поля');
+        return;
+    }
+
+    const entry = {
+        type: 'individual',
+        name, position, dept, link,
+        date: new Date().toISOString()
+    };
+
+    saveRegistration(entry);
+    closeModal('participateModal');
+    showToast('Заявка отправлена!');
+
+    document.getElementById('individualSuccessBanner').classList.add('show');
+
+    // Reset form
+    document.getElementById('indivName').value = '';
+    document.getElementById('indivPosition').value = '';
+    document.getElementById('indivDept').value = '';
+    document.getElementById('indivLink').value = '';
+}
+
+function submitGroup() {
+    const teamName = document.getElementById('groupTeamName').value.trim();
+    const link = document.getElementById('groupLink').value.trim();
+    const names = document.querySelectorAll('#groupMembersContainer .group-member-name');
+    const depts = document.querySelectorAll('#groupMembersContainer .group-member-dept');
+
+    if (!teamName) {
+        showToast('Введите название команды');
+        return;
+    }
+
+    const members = [];
+    names.forEach((n, i) => {
+        const nm = n.value.trim();
+        const dp = depts[i] ? depts[i].value.trim() : '';
+        if (nm) members.push({ name: nm, dept: dp });
+    });
+
+    if (members.length < 2) {
+        showToast('Минимум 2 участника в команде');
+        return;
+    }
+
+    const entry = {
+        type: 'group',
+        teamName, members, link,
+        date: new Date().toISOString()
+    };
+
+    saveRegistration(entry);
+    closeModal('participateModal');
+    showToast('Команда зарегистрирована!');
+
+    document.getElementById('groupSuccessBanner').classList.add('show');
+}
+
+function saveRegistration(entry) {
+    // Save to localStorage as a simple persistent store
+    // In production, replace with API call to Bitrix
+    const KEY = 'reso_registrations';
+    let regs = [];
+    try { regs = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) {}
+    regs.push(entry);
+    localStorage.setItem(KEY, JSON.stringify(regs));
+    console.log('Registration saved:', entry);
 }
