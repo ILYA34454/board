@@ -860,8 +860,8 @@ body {
     margin-bottom: var(--sp-8);
     background: var(--green-primary);
     background-image: url('https://i.ibb.co/gLLSBfhY/2.png');
-    background-size: auto 160px;
-    background-position: right 40px center;
+    background-size: auto 180px;
+    background-position: center;
     background-repeat: no-repeat;
     color: var(--white);
     position: relative;
