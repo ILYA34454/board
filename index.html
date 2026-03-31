@@ -12,7 +12,6 @@
         <!-- ═══ HERO BANNER ═══ -->
         <div class="banner">
             <div class="banner-content">
-                <div class="breadcrumbs">Главная &gt; Доска почёта</div>
                 <h1>Лучшие сотрудники 2026</h1>
                 <p>Здесь мы отмечаем тех, кто показывает лучшие результаты. Выберите департамент, чтобы увидеть подробности.</p>
                 <button class="btn-about-contest" onclick="document.getElementById('aboutContestModal').classList.add('active')">О конкурсе</button>
@@ -43,10 +42,12 @@
         <div id="overallView" style="display:none;">
             <!-- Challenge banner -->
             <div class="challenge-intro" id="challengeIntro">
-                <h2 id="challengeTitle">Апрельский челлендж Мастер публичных выступлений</h2>
-                <div class="challenge-buttons">
-                    <button class="challenge-btn-participate" onclick="document.getElementById('participateModal').classList.add('active')">Принять участие</button>
-                    <button class="challenge-detail-btn" onclick="document.getElementById('challengeDetailModal').classList.add('active')">О челлендже</button>
+                <div class="challenge-intro-text">
+                    <h2 id="challengeTitle">Апрельский челлендж Мастер публичных выступлений</h2>
+                    <div class="challenge-buttons">
+                        <button class="challenge-btn-participate" onclick="document.getElementById('participateModal').classList.add('active')">Принять участие</button>
+                        <button class="challenge-detail-btn" onclick="document.getElementById('challengeDetailModal').classList.add('active')">О челлендже</button>
+                    </div>
                 </div>
                 <img class="challenge-intro-img" src="https://i.ibb.co/sdD6S7zZ/image.png" alt="">
             </div>
@@ -141,38 +142,47 @@
             <button class="modal-close" onclick="closeModal('challengeDetailModal')">&times;</button>
             <h3 class="modal-title" id="challengeModalTitle">Мастер публичных выступлений</h3>
             <p class="modal-text" id="challengeModalDesc">Апрельский челлендж — шанс познакомиться ближе и раскрыть свои таланты перед коллегами.</p>
-            <div id="challengeModalBody">
-                <div class="challenge-cards-row" style="margin-bottom:16px;">
-                    <div class="challenge-card">
-                        <div class="challenge-card-header"><span class="challenge-card-title">Индивидуальный челлендж</span></div>
-                        <div class="challenge-card-body">
-                            <div class="challenge-task">Создайте <strong>3-минутное видео</strong> «Как моя работа влияет на успех компании».</div>
-                            <div class="challenge-points">
-                                <div class="challenge-point"><div class="challenge-point-dot"></div><span>Ключевые этапы карьеры</span></div>
-                                <div class="challenge-point"><div class="challenge-point-dot"></div><span>Конкретные проекты и результаты</span></div>
-                                <div class="challenge-point"><div class="challenge-point-dot"></div><span>Личные качества и навыки</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="challenge-card">
-                        <div class="challenge-card-header"><span class="challenge-card-title">Командный челлендж</span></div>
-                        <div class="challenge-card-body">
-                            <div class="challenge-task">Подготовьте <strong>3-минутное видео</strong> командой по одной из двух тем.</div>
-                            <div class="challenge-points">
-                                <div class="challenge-point"><div class="challenge-point-dot"></div><span>Бизнес-прогноз в стиле новостного выпуска</span></div>
-                                <div class="challenge-point"><div class="challenge-point-dot"></div><span>История компании через яркие эпохи</span></div>
-                            </div>
+
+            <!-- Segmented tabs for challenge modal -->
+            <div class="sub-toggle" id="challengeToggle" style="margin-bottom:20px;">
+                <button class="sub-toggle-btn active" data-challenge="individual" onclick="switchChallengeTab('individual')"><i class="fas fa-user" style="font-size:12px;margin-right:7px;"></i>Индивидуальный</button>
+                <button class="sub-toggle-btn" data-challenge="group" onclick="switchChallengeTab('group')"><i class="fas fa-users" style="font-size:12px;margin-right:7px;"></i>Командный</button>
+            </div>
+
+            <div id="challengeIndividualContent">
+                <div class="challenge-card" style="margin-bottom:16px;">
+                    <div class="challenge-card-header"><span class="challenge-card-title">Индивидуальный челлендж</span></div>
+                    <div class="challenge-card-body">
+                        <div class="challenge-task">Создайте <strong>3-минутное видео</strong> «Как моя работа влияет на успех компании».</div>
+                        <div class="challenge-points">
+                            <div class="challenge-point"><div class="challenge-point-dot"></div><span>Ключевые этапы карьеры</span></div>
+                            <div class="challenge-point"><div class="challenge-point-dot"></div><span>Конкретные проекты и результаты</span></div>
+                            <div class="challenge-point"><div class="challenge-point-dot"></div><span>Личные качества и навыки</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="challenge-submit">
-                    <div class="challenge-submit-icon"><i class="fas fa-paper-plane"></i></div>
-                    <div class="challenge-submit-text">
-                        <div class="challenge-submit-title">Как отправить?</div>
-                        <div class="challenge-submit-sub">Загрузите на Яндекс Диск и пришлите ссылку до 30 апреля.</div>
+            </div>
+
+            <div id="challengeGroupContent" style="display:none;">
+                <div class="challenge-card" style="margin-bottom:16px;">
+                    <div class="challenge-card-header"><span class="challenge-card-title">Командный челлендж</span></div>
+                    <div class="challenge-card-body">
+                        <div class="challenge-task">Подготовьте <strong>3-минутное видео</strong> командой по одной из двух тем.</div>
+                        <div class="challenge-points">
+                            <div class="challenge-point"><div class="challenge-point-dot"></div><span>Бизнес-прогноз в стиле новостного выпуска</span></div>
+                            <div class="challenge-point"><div class="challenge-point-dot"></div><span>История компании через яркие эпохи</span></div>
+                        </div>
                     </div>
-                    <a href="mailto:aleshina@resoleasing.com" class="challenge-submit-btn"><i class="fas fa-envelope"></i> Написать</a>
                 </div>
+            </div>
+
+            <div class="challenge-submit">
+                <div class="challenge-submit-icon"><i class="fas fa-paper-plane"></i></div>
+                <div class="challenge-submit-text">
+                    <div class="challenge-submit-title">Как отправить?</div>
+                    <div class="challenge-submit-sub">Загрузите на Яндекс Диск и пришлите ссылку до 30 апреля.</div>
+                </div>
+                <a href="mailto:aleshina@resoleasing.com" class="challenge-submit-btn"><i class="fas fa-envelope"></i> Написать</a>
             </div>
         </div>
     </div>
@@ -184,9 +194,12 @@
             <div class="about-contest-header">
                 <h3 class="modal-title" style="font-size:20px;margin-bottom:0;">О конкурсе «РЕСО — это мы!»</h3>
             </div>
-            <div class="about-contest-tabs">
-                <button class="about-contest-tab active" onclick="switchAboutTab(0)">Для участников</button>
-                <button class="about-contest-tab" onclick="switchAboutTab(1)">Рабочая группа</button>
+            <!-- Segmented tabs instead of text tabs -->
+            <div style="padding: 16px 32px 0 32px;">
+                <div class="sub-toggle" id="aboutContestToggle">
+                    <button class="sub-toggle-btn active" data-about="0" onclick="switchAboutTab(0)"><i class="fas fa-user" style="font-size:12px;margin-right:7px;"></i>Для участников</button>
+                    <button class="sub-toggle-btn" data-about="1" onclick="switchAboutTab(1)"><i class="fas fa-users-cog" style="font-size:12px;margin-right:7px;"></i>Рабочая группа</button>
+                </div>
             </div>
             <div class="about-contest-body" id="aboutContestBody"></div>
         </div>
@@ -266,13 +279,6 @@
 
     <div class="toast" id="toast"></div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     JAVASCRIPT — DATA & LOGIC
-     Structured for easy Bitrix integration.
-     
-     To update nominees: edit the MONTH_DATA object below.
-     Each month (0–11) maps to nomination and rating data.
-     ═══════════════════════════════════════════════════════════ -->
 <script src="reso-board.js"></script>
 </body>
 </html>
