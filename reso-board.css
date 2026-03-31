@@ -207,7 +207,7 @@ body {
 .breadcrumbs {
     font-size: 14px;
     opacity: 0.7;
-    margin-bottom: 56px;
+    margin-bottom: 72px;
 }
 
 .banner h1 {
@@ -231,7 +231,7 @@ body {
     padding: 0 24px;
     height: 40px;
     font-size: 14px;
-    margin-top: 30px;
+    margin-top: 32px;
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: background var(--ease-default);
@@ -288,7 +288,7 @@ body {
 
 .tab.active {
     background: var(--white);
-    color: var(--text-primary);
+    color: var(--green-primary);
     box-shadow: var(--shadow-tab);
 }
 
@@ -856,69 +856,64 @@ body {
 /* ── CHALLENGE SECTION ─────────────────────────────────────── */
 .challenge-intro {
     border-radius: 14px;
-    padding: var(--sp-10) var(--sp-10);
+    padding: var(--sp-8) var(--sp-10);
     margin-bottom: var(--sp-8);
-    background: linear-gradient(135deg, #1a2f3a 0%, #1e3d4f 60%, #235265 100%);
+    background: var(--green-primary);
     color: var(--white);
     position: relative;
     overflow: hidden;
-}
-
-.challenge-intro::before {
-    content: '';
-    position: absolute;
-    right: -40px;
-    top: -40px;
-    width: 260px;
-    height: 260px;
-    border-radius: var(--radius-round);
-    background: rgba(255,255,255,0.06);
-    pointer-events: none;
-}
-
-.challenge-intro::after {
-    content: '';
-    position: absolute;
-    right: 60px;
-    bottom: -60px;
-    width: 180px;
     height: 180px;
-    border-radius: var(--radius-round);
-    background: rgba(255,255,255,0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.challenge-intro::before { display: none; }
+.challenge-intro::after { display: none; }
+
+.challenge-intro-img {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 160px;
     pointer-events: none;
+    z-index: 1;
 }
 
 .challenge-intro h2 {
     font-size: 24px;
     font-weight: 600;
     line-height: 120%;
-    margin-bottom: var(--sp-2);
+    margin-bottom: 0;
+    position: relative;
+    z-index: 2;
 }
 
 .challenge-intro p {
     font-size: 14px;
     line-height: 140%;
     opacity: 0.85;
-    max-width: 900px;
+    max-width: 700px;
+    display: none;
 }
 
 .challenge-deadline {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-2);
-    font-size: 12px;
-    font-weight: 500;
-    background: rgba(255,255,255,0.15);
-    border-radius: var(--radius-pill);
-    padding: 6px 14px;
-    margin-bottom: var(--sp-4);
+    display: none;
 }
 
-.challenge-detail-btn {
+.challenge-buttons {
+    display: flex;
+    gap: var(--sp-3);
+    margin-top: var(--sp-6);
+    position: relative;
+    z-index: 2;
+}
+
+.challenge-btn-participate {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 7px;
     padding: 0 24px;
     height: 40px;
     background: var(--white);
@@ -930,7 +925,26 @@ body {
     cursor: pointer;
     font-family: var(--font);
     transition: background 0.2s;
-    margin-top: var(--sp-5);
+}
+
+.challenge-btn-participate:hover { background: var(--neutral-100); }
+
+.challenge-detail-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 24px;
+    height: 40px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: var(--radius-md);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.2s;
 }
 
 .challenge-detail-btn:hover { background: var(--neutral-100); }
@@ -1242,6 +1256,70 @@ body {
     font-weight: 500;
 }
 .about-contest-body a { color: var(--green-primary); text-decoration: underline; }
+
+
+/* ── FORM ELEMENTS (registration modal) ────────────────────── */
+.form-group {
+    margin-bottom: var(--sp-4);
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    line-height: var(--leading);
+}
+
+.form-input {
+    width: 100%;
+    height: 44px;
+    padding: 0 var(--sp-4);
+    border: 1px solid var(--neutral-200);
+    border-radius: var(--radius-md);
+    font-family: var(--font);
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--white);
+    transition: border-color var(--ease-default);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-input::placeholder { color: var(--text-placeholder); }
+.form-input:focus { border-color: var(--green-primary); }
+
+.form-group-row {
+    margin-bottom: var(--sp-3);
+}
+
+.form-group-row .form-label {
+    margin-bottom: 6px;
+}
+
+.form-group-row .form-input {
+    margin-bottom: 6px;
+}
+
+.btn-add-member {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--green-surface);
+    color: var(--green-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: var(--sp-2);
+}
+
+.btn-add-member:hover { background: var(--green-border); }
 
 
 /* ── MISC ──────────────────────────────────────────────────── */
