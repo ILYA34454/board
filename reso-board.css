@@ -374,10 +374,10 @@ body {
 }
 
 .section-title img {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
-    margin-right: var(--sp-2);
+    margin-right: var(--sp-4);
 }
 
 #nomSections .section-title:first-child { margin-top: 0; }
@@ -797,7 +797,7 @@ body {
 .pagination-btn.active {
     background: transparent;
     color: var(--green-primary);
-    font-weight: 600;
+    font-weight: 400;
     border-bottom: 2px solid var(--green-primary);
     border-radius: 0;
 }
