@@ -1,8 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ──────────────────────────────────────────────────────────
-       CONFIG: Categories / Tabs
-       ────────────────────────────────────────────────────────── */
     const CATEGORIES = [
         { id: 'commercial',  name: 'Коммерческий департамент',           icon: 'fas fa-chart-line'    },
         { id: 'security',    name: 'Деп. экономической безопасности',    icon: 'fas fa-shield-halved' },
@@ -10,12 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const MONTH_NAMES = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-    const ACTIVE_MONTHS = [0, 1, 2, 3];
-    const CURRENT_MONTH = 3;
+    const ACTIVE_MONTHS = [0, 1, 2];
+    const CURRENT_MONTH = 2;
 
-    /* ──────────────────────────────────────────────────────────
-       CONFIG: Nomination titles, metrics, icons
-       ────────────────────────────────────────────────────────── */
     const NOM_METRICS = {
         commercial: [
             'Процент выполнения личного плана от 75%',
@@ -33,18 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
-    /* ──────────────────────────────────────────────────────────
-       DATA: Loaded from reso-data.json
-       ────────────────────────────────────────────────────────── */
     let MONTH_DATA = {};
     let OVERALL_INDIVIDUAL = {};
     let OVERALL_GROUPS = {};
     let CHALLENGES = {};
 
-
-    /* ══════════════════════════════════════════════════════════
-       STATE
-       ══════════════════════════════════════════════════════════ */
     let boardTab = 'commercial';
     let selectedMonth = CURRENT_MONTH;
     let tableData = [];
@@ -58,9 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let groupTablePageSize = 10;
 
 
-    /* ══════════════════════════════════════════════════════════
-       TABS
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ TABS ══════ */
     const tabsWrapper = document.getElementById('tabsWrapper');
 
     function buildBoardTabs() {
@@ -81,9 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* ══════════════════════════════════════════════════════════
-       MONTH SELECTOR
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ MONTH SELECTOR ══════ */
     const monthSelectBox = document.getElementById('monthSelectBox');
     const monthSelectText = document.getElementById('monthSelectText');
     const monthSelectDropdown = document.getElementById('monthSelectDropdown');
@@ -111,12 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     monthSelectBox.addEventListener('click', () => monthSelectBox.classList.toggle('open'));
     document.addEventListener('click', e => { if (!monthSelectBox.contains(e.target)) monthSelectBox.classList.remove('open'); });
+    monthSelectText.textContent = MONTH_NAMES[CURRENT_MONTH] + ' 2026';
     buildMonthDropdown();
 
 
-    /* ══════════════════════════════════════════════════════════
-       VIEW SWITCHING
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ VIEW SWITCHING ══════ */
     function switchView() {
         const isOverall = boardTab === 'overall';
         document.getElementById('deptView').style.display = isOverall ? 'none' : '';
@@ -134,11 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* ══════════════════════════════════════════════════════════
-       CHALLENGE UPDATE
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ CHALLENGE UPDATE ══════ */
     function updateChallenge() {
-        const ch = CHALLENGES[selectedMonth] || CHALLENGES[CURRENT_MONTH];
+        const ch = CHALLENGES[selectedMonth];
         if (!ch) {
             document.getElementById('challengeIntro').style.display = 'none';
             return;
@@ -149,26 +129,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* ══════════════════════════════════════════════════════════
-       NOMINATIONS RENDERING
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ NOMINATIONS ══════ */
     function renderBoard() {
         const container = document.getElementById('nomSections');
         container.innerHTML = '';
         const monthData = MONTH_DATA[selectedMonth];
-        if (!monthData || !monthData[boardTab]) {
+        if (!monthData || !monthData[boardTab] || !monthData[boardTab].length || monthData[boardTab].every(c => !c.nominees || !c.nominees.length)) {
             container.innerHTML = '<div class="empty-state"><i class="far fa-folder-open"></i><p>Нет данных за этот месяц</p></div>';
             return;
         }
 
         const data = monthData[boardTab];
-
-        // If no nominees at all, show empty
-        if (!data.length || data.every(c => !c.nominees || !c.nominees.length)) {
-            container.innerHTML = '<div class="empty-state"><i class="far fa-folder-open"></i><p>Нет данных за этот месяц</p></div>';
-            return;
-        }
-
         const metrics = NOM_METRICS[boardTab] || [];
         const placeNames = ['1 место', '2 место', '3 место'];
         const groups = NOM_GROUPS[boardTab];
@@ -187,10 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.insertAdjacentHTML('beforeend', section);
             });
         } else {
-            // Security or other — no grouping
-            const icon = boardTab === 'security'
-                ? 'https://i.ibb.co/WJR5CS5/Frame-2131331990.png'
-                : '';
+            const icon = boardTab === 'security' ? 'https://i.ibb.co/WJR5CS5/Frame-2131331990.png' : '';
             const iconHtml = icon ? `<img src="${icon}" alt="">` : '';
             let html = `<h2 class="section-title">${iconHtml}Лучшие в номинациях</h2><div class="cards-grid fade-in">`;
             data.forEach((cat, ci) => {
@@ -218,9 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* ══════════════════════════════════════════════════════════
-       REGIONS
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ REGIONS ══════ */
     function renderRegions() {
         const g = document.getElementById('regionsGrid');
         g.innerHTML = '';
@@ -257,14 +223,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* ══════════════════════════════════════════════════════════
-       OVERALL INDIVIDUAL TABLE
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ OVERALL INDIVIDUAL TABLE ══════ */
     function renderOverallIndividual() {
-        tableData = OVERALL_INDIVIDUAL[selectedMonth] || OVERALL_INDIVIDUAL[CURRENT_MONTH] || [];
+        tableData = OVERALL_INDIVIDUAL[selectedMonth] || [];
         tablePage = 1;
         tableSortCol = null;
         tableSortDir = 1;
+
+        const section = document.getElementById('individualSection');
+        const emptyEl = document.getElementById('individualEmpty');
+
+        if (!tableData.length) {
+            section.querySelector('.rating-table-wrap').style.display = 'none';
+            section.querySelector('.table-footer').style.display = 'none';
+            emptyEl.style.display = '';
+            return;
+        }
+
+        section.querySelector('.rating-table-wrap').style.display = '';
+        section.querySelector('.table-footer').style.display = '';
+        emptyEl.style.display = 'none';
 
         document.querySelectorAll('#ratingTable thead .sort-icon').forEach(icon => {
             const th = icon.closest('th');
@@ -336,25 +314,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderPagination(totalPages) {
         const pg = document.getElementById('tablePagination');
         pg.innerHTML = '';
-
         const prev = mkNavBtn('left', tablePage === 1);
         prev.addEventListener('click', () => { if (tablePage > 1) { tablePage--; drawTable(); } });
         pg.appendChild(prev);
-
         const range = 2;
         let pStart = Math.max(1, tablePage - range);
         let pEnd = Math.min(totalPages, tablePage + range);
-
-        if (pStart > 1) {
-            pg.appendChild(mkPageBtn(1));
-            if (pStart > 2) pg.appendChild(mkDots());
-        }
+        if (pStart > 1) { pg.appendChild(mkPageBtn(1)); if (pStart > 2) pg.appendChild(mkDots()); }
         for (let p = pStart; p <= pEnd; p++) pg.appendChild(mkPageBtn(p));
-        if (pEnd < totalPages) {
-            if (pEnd < totalPages - 1) pg.appendChild(mkDots());
-            pg.appendChild(mkPageBtn(totalPages));
-        }
-
+        if (pEnd < totalPages) { if (pEnd < totalPages - 1) pg.appendChild(mkDots()); pg.appendChild(mkPageBtn(totalPages)); }
         const next = mkNavBtn('right', tablePage === totalPages);
         next.addEventListener('click', () => { if (tablePage < totalPages) { tablePage++; drawTable(); } });
         pg.appendChild(next);
@@ -367,14 +335,12 @@ document.addEventListener('DOMContentLoaded', () => {
         b.addEventListener('click', () => { tablePage = p; drawTable(); });
         return b;
     }
-
     function mkNavBtn(dir, disabled) {
         const b = document.createElement('button');
         b.className = 'pagination-btn' + (disabled ? ' disabled' : '');
         b.innerHTML = `<i class="fas fa-chevron-${dir}"></i>`;
         return b;
     }
-
     function mkDots() {
         const d = document.createElement('span');
         d.className = 'pagination-dots';
@@ -383,12 +349,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* ══════════════════════════════════════════════════════════
-       OVERALL GROUP TABLE
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ OVERALL GROUP TABLE ══════ */
     function renderOverallGroups() {
-        groupTableData = OVERALL_GROUPS[selectedMonth] || OVERALL_GROUPS[CURRENT_MONTH] || [];
+        groupTableData = OVERALL_GROUPS[selectedMonth] || [];
         groupTablePage = 1;
+
+        const section = document.getElementById('groupSection');
+        const emptyEl = document.getElementById('groupEmpty');
+
+        if (!groupTableData.length) {
+            section.querySelector('.rating-table-wrap').style.display = 'none';
+            section.querySelector('.table-footer').style.display = 'none';
+            emptyEl.style.display = '';
+            return;
+        }
+
+        section.querySelector('.rating-table-wrap').style.display = '';
+        section.querySelector('.table-footer').style.display = '';
+        emptyEl.style.display = 'none';
 
         const ps = document.getElementById('groupPageSizeSelect');
         if (ps && !ps._wired) {
@@ -436,25 +414,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderGroupPagination(totalPages) {
         const pg = document.getElementById('groupTablePagination');
         pg.innerHTML = '';
-
         const prev = mkNavBtn('left', groupTablePage === 1);
         prev.addEventListener('click', () => { if (groupTablePage > 1) { groupTablePage--; drawGroupTable(); } });
         pg.appendChild(prev);
-
         const range = 2;
         let pStart = Math.max(1, groupTablePage - range);
         let pEnd = Math.min(totalPages, groupTablePage + range);
-
-        if (pStart > 1) {
-            pg.appendChild(mkGroupPageBtn(1));
-            if (pStart > 2) pg.appendChild(mkDots());
-        }
+        if (pStart > 1) { pg.appendChild(mkGroupPageBtn(1)); if (pStart > 2) pg.appendChild(mkDots()); }
         for (let p = pStart; p <= pEnd; p++) pg.appendChild(mkGroupPageBtn(p));
-        if (pEnd < totalPages) {
-            if (pEnd < totalPages - 1) pg.appendChild(mkDots());
-            pg.appendChild(mkGroupPageBtn(totalPages));
-        }
-
+        if (pEnd < totalPages) { if (pEnd < totalPages - 1) pg.appendChild(mkDots()); pg.appendChild(mkGroupPageBtn(totalPages)); }
         const next = mkNavBtn('right', groupTablePage === totalPages);
         next.addEventListener('click', () => { if (groupTablePage < totalPages) { groupTablePage++; drawGroupTable(); } });
         pg.appendChild(next);
@@ -469,9 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    /* ══════════════════════════════════════════════════════════
-       SEGMENTED TOGGLE (individual / group)
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ SEGMENTED TOGGLE (individual / group) ══════ */
     document.querySelectorAll('#subToggle .sub-toggle-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('#subToggle .sub-toggle-btn').forEach(b => b.classList.remove('active'));
@@ -483,9 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    /* ══════════════════════════════════════════════════════════
-       ABOUT CONTEST — segmented tabs
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ ABOUT CONTEST — segmented tabs ══════ */
     const aboutContestContent = [
         `<h3>Стартует главный конкурс года!</h3>
 <p>В РЕСО-Лизинг каждый сотрудник — важная часть большой команды.</p>
@@ -519,32 +483,25 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     window.switchAboutTab = function(idx) {
-        // Update segmented toggle buttons
         document.querySelectorAll('#aboutContestToggle .sub-toggle-btn').forEach((b, i) => {
             b.classList.toggle('active', i === idx);
         });
         document.getElementById('aboutContestBody').innerHTML = aboutContestContent[idx];
     };
-
     switchAboutTab(0);
 
-    // Close modals on overlay click
     document.getElementById('aboutContestModal').addEventListener('click', e => {
         if (e.target === document.getElementById('aboutContestModal')) closeModal('aboutContestModal');
     });
-
     document.getElementById('participateModal').addEventListener('click', e => {
         if (e.target === document.getElementById('participateModal')) closeModal('participateModal');
     });
-
     document.getElementById('challengeDetailModal').addEventListener('click', e => {
         if (e.target === document.getElementById('challengeDetailModal')) closeModal('challengeDetailModal');
     });
 
 
-    /* ══════════════════════════════════════════════════════════
-       INIT — Load data from JSON, then render
-       ══════════════════════════════════════════════════════════ */
+    /* ══════ INIT ══════ */
     fetch('reso-data.json')
         .then(r => r.json())
         .then(data => {
@@ -552,9 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
             OVERALL_INDIVIDUAL = data.overallIndividual || {};
             OVERALL_GROUPS = data.overallGroups || {};
             CHALLENGES = data.challenges || {};
-
             buildBoardTabs();
-            renderRegions();
             switchView();
         })
         .catch(err => {
@@ -565,9 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-/* ──────────────────────────────────────────────────────────
-   GLOBAL HELPERS
-   ────────────────────────────────────────────────────────── */
+/* ══════ GLOBAL HELPERS ══════ */
 function closeModal(id) {
     document.getElementById(id).classList.remove('active');
 }
@@ -579,7 +532,6 @@ function showToast(text) {
     setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-/* ── PARTICIPATE MODAL — segmented tab switching ────────────── */
 function switchParticipateTab(mode) {
     document.querySelectorAll('#participateToggle .sub-toggle-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.mode === mode);
@@ -588,7 +540,6 @@ function switchParticipateTab(mode) {
     document.getElementById('participateGroup').style.display = mode === 'group' ? '' : 'none';
 }
 
-/* ── CHALLENGE DETAIL MODAL — segmented tab switching ──────── */
 function switchChallengeTab(mode) {
     document.querySelectorAll('#challengeToggle .sub-toggle-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.challenge === mode);
@@ -616,24 +567,12 @@ function submitIndividual() {
     const position = document.getElementById('indivPosition').value.trim();
     const dept = document.getElementById('indivDept').value.trim();
     const link = document.getElementById('indivLink').value.trim();
-
-    if (!name || !position || !dept) {
-        showToast('Заполните все обязательные поля');
-        return;
-    }
-
-    const entry = {
-        type: 'individual',
-        name, position, dept, link,
-        date: new Date().toISOString()
-    };
-
+    if (!name || !position || !dept) { showToast('Заполните все обязательные поля'); return; }
+    const entry = { type: 'individual', name, position, dept, link, date: new Date().toISOString() };
     saveRegistration(entry);
     closeModal('participateModal');
     showToast('Заявка отправлена!');
-
     document.getElementById('individualSuccessBanner').classList.add('show');
-
     document.getElementById('indivName').value = '';
     document.getElementById('indivPosition').value = '';
     document.getElementById('indivDept').value = '';
@@ -645,34 +584,18 @@ function submitGroup() {
     const link = document.getElementById('groupLink').value.trim();
     const names = document.querySelectorAll('#groupMembersContainer .group-member-name');
     const depts = document.querySelectorAll('#groupMembersContainer .group-member-dept');
-
-    if (!teamName) {
-        showToast('Введите название команды');
-        return;
-    }
-
+    if (!teamName) { showToast('Введите название команды'); return; }
     const members = [];
     names.forEach((n, i) => {
         const nm = n.value.trim();
         const dp = depts[i] ? depts[i].value.trim() : '';
         if (nm) members.push({ name: nm, dept: dp });
     });
-
-    if (members.length < 2) {
-        showToast('Минимум 2 участника в команде');
-        return;
-    }
-
-    const entry = {
-        type: 'group',
-        teamName, members, link,
-        date: new Date().toISOString()
-    };
-
+    if (members.length < 2) { showToast('Минимум 2 участника в команде'); return; }
+    const entry = { type: 'group', teamName, members, link, date: new Date().toISOString() };
     saveRegistration(entry);
     closeModal('participateModal');
     showToast('Команда зарегистрирована!');
-
     document.getElementById('groupSuccessBanner').classList.add('show');
 }
 
