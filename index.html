@@ -43,10 +43,12 @@
         <div id="overallView" style="display:none;">
             <!-- Challenge banner -->
             <div class="challenge-intro" id="challengeIntro">
-                <div class="challenge-deadline"><i class="fas fa-clock"></i> <span id="challengeDeadlineText">Крайний срок: 30 апреля 2026</span></div>
-                <h2 id="challengeTitle">Мастер публичных выступлений</h2>
-                <p id="challengeDesc">Апрельский челлендж — шанс познакомиться ближе! Выступая перед коллегами, каждый сможет раскрыть свои сильные стороны, показать профессиональные навыки и поделиться частичкой своей личности.</p>
-                <button class="challenge-detail-btn" onclick="document.getElementById('challengeDetailModal').classList.add('active')"><i class="fas fa-arrow-right" style="font-size:12px;"></i> Подробнее</button>
+                <h2 id="challengeTitle">Апрельский челлендж Мастер публичных выступлений</h2>
+                <div class="challenge-buttons">
+                    <button class="challenge-btn-participate" onclick="document.getElementById('participateModal').classList.add('active')">Принять участие</button>
+                    <button class="challenge-detail-btn" onclick="document.getElementById('challengeDetailModal').classList.add('active')">О челлендже</button>
+                </div>
+                <img class="challenge-intro-img" src="https://i.ibb.co/sdD6S7zZ/image.png" alt="">
             </div>
 
             <!-- Segmented control -->
@@ -187,6 +189,78 @@
                 <button class="about-contest-tab" onclick="switchAboutTab(1)">Рабочая группа</button>
             </div>
             <div class="about-contest-body" id="aboutContestBody"></div>
+        </div>
+    </div>
+
+    <!-- ═══ PARTICIPATE MODAL ═══ -->
+    <div class="modal-overlay" id="participateModal">
+        <div class="modal-content" style="width:560px;">
+            <button class="modal-close" onclick="closeModal('participateModal')">&times;</button>
+            <h3 class="modal-title">Регистрация на челлендж</h3>
+            <p class="modal-text">Выберите формат участия и заполните данные.</p>
+
+            <div class="sub-toggle" id="participateToggle" style="margin-bottom:20px;">
+                <button class="sub-toggle-btn active" data-mode="individual" onclick="switchParticipateTab('individual')"><i class="fas fa-user" style="font-size:12px;margin-right:7px;"></i>Индивидуально</button>
+                <button class="sub-toggle-btn" data-mode="group" onclick="switchParticipateTab('group')"><i class="fas fa-users" style="font-size:12px;margin-right:7px;"></i>Команда</button>
+            </div>
+
+            <!-- Individual form -->
+            <div id="participateIndividual">
+                <div class="form-group">
+                    <label class="form-label">Фамилия и имя</label>
+                    <input type="text" class="form-input" id="indivName" placeholder="Иванов Иван">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Должность</label>
+                    <input type="text" class="form-input" id="indivPosition" placeholder="Менеджер по продажам">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Департамент</label>
+                    <input type="text" class="form-input" id="indivDept" placeholder="Коммерческий департамент">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ссылка на материал (Яндекс Диск)</label>
+                    <input type="text" class="form-input" id="indivLink" placeholder="https://disk.yandex.ru/...">
+                </div>
+                <div class="modal-actions" style="margin-top:24px;">
+                    <button class="btn btn-secondary" onclick="closeModal('participateModal')">Отмена</button>
+                    <button class="btn btn-primary" onclick="submitIndividual()">Отправить заявку</button>
+                </div>
+            </div>
+
+            <!-- Group form -->
+            <div id="participateGroup" style="display:none;">
+                <div class="form-group">
+                    <label class="form-label">Название команды</label>
+                    <input type="text" class="form-input" id="groupTeamName" placeholder="Команда «Название»">
+                </div>
+                <div id="groupMembersContainer">
+                    <div class="form-group-row">
+                        <label class="form-label">Участник 1</label>
+                        <input type="text" class="form-input group-member-name" placeholder="Фамилия Имя">
+                        <input type="text" class="form-input group-member-dept" placeholder="Департамент">
+                    </div>
+                    <div class="form-group-row">
+                        <label class="form-label">Участник 2</label>
+                        <input type="text" class="form-input group-member-name" placeholder="Фамилия Имя">
+                        <input type="text" class="form-input group-member-dept" placeholder="Департамент">
+                    </div>
+                    <div class="form-group-row">
+                        <label class="form-label">Участник 3</label>
+                        <input type="text" class="form-input group-member-name" placeholder="Фамилия Имя">
+                        <input type="text" class="form-input group-member-dept" placeholder="Департамент">
+                    </div>
+                </div>
+                <button class="btn-add-member" onclick="addGroupMember()"><i class="fas fa-plus" style="font-size:11px;"></i> Добавить участника</button>
+                <div class="form-group" style="margin-top:16px;">
+                    <label class="form-label">Ссылка на материал (Яндекс Диск)</label>
+                    <input type="text" class="form-input" id="groupLink" placeholder="https://disk.yandex.ru/...">
+                </div>
+                <div class="modal-actions" style="margin-top:24px;">
+                    <button class="btn btn-secondary" onclick="closeModal('participateModal')">Отмена</button>
+                    <button class="btn btn-primary" onclick="submitGroup()">Отправить заявку</button>
+                </div>
+            </div>
         </div>
     </div>
 
