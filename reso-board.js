@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const NOM_GROUPS = {
         commercial: [
-            { title: 'Лидеры по маржинальности',  img3d: 'https://i.ibb.co/Ng5Vs8tB/Procent-2.png', indices: [0, 1] },
-            { title: 'Лидеры по объёму продаж',  img3d: 'https://i.ibb.co/HfG2gVxT/Card-2.png', indices: [2, 3] }
+            { title: 'Лидеры по маржинальности',  img3d: 'https://i.ibb.co/h5MSb1Z/Frame-2131331987.png', indices: [0, 1] },
+            { title: 'Лидеры по объёму продаж',  img3d: 'https://i.ibb.co/4wmF2L8d/Frame-2131331988.png', indices: [2, 3] }
         ]
     };
 
@@ -150,6 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let tableSortDir = 1;
     let tablePage = 1;
     let tablePageSize = 10;
+
+    let groupTableData = [];
+    let groupTablePage = 1;
+    let groupTablePageSize = 10;
 
 
     /* ══════════════════════════════════════════════════════════
@@ -272,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } else {
             const icon = boardTab === 'security'
-                ? 'https://i.ibb.co/jqn1dY1/Pyramid.png'
+                ? 'https://i.ibb.co/WJR5CS5/Frame-2131331990.png'
                 : '';
             const iconHtml = icon ? `<img src="${icon}" alt="">` : '';
             let html = `<h2 class="section-title">${iconHtml}Лучшие в номинациях</h2><div class="cards-grid fade-in">`;
@@ -470,26 +474,86 @@ document.addEventListener('DOMContentLoaded', () => {
        OVERALL GROUP TABLE
        ══════════════════════════════════════════════════════════ */
     function renderOverallGroups() {
+        groupTableData = OVERALL_GROUPS[selectedMonth] || OVERALL_GROUPS[CURRENT_MONTH] || [];
+        groupTablePage = 1;
+
+        // Wire page size
+        const ps = document.getElementById('groupPageSizeSelect');
+        if (ps && !ps._wired) {
+            ps._wired = true;
+            ps.addEventListener('change', function() {
+                groupTablePageSize = parseInt(this.value);
+                groupTablePage = 1;
+                drawGroupTable();
+            });
+        }
+
+        drawGroupTable();
+    }
+
+    function drawGroupTable() {
+        const data = [...groupTableData];
+        const total = data.length;
+        const totalPages = Math.max(1, Math.ceil(total / groupTablePageSize));
+        if (groupTablePage > totalPages) groupTablePage = totalPages;
+        const start = (groupTablePage - 1) * groupTablePageSize;
+        const end = Math.min(start + groupTablePageSize, total);
         const body = document.getElementById('groupRatingBody');
         body.innerHTML = '';
-        const groups = OVERALL_GROUPS[selectedMonth] || OVERALL_GROUPS[CURRENT_MONTH] || [];
 
-        groups.forEach((g, gi) => {
+        for (let i = start; i < end; i++) {
+            const g = data[i];
             const avatarStack = g.members.slice(0, 4).map((m, mi) =>
                 `<img src="${m.img}" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'" alt="${m.name}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #fff;${mi > 0 ? 'margin-left:-10px;' : ''}position:relative;z-index:${4 - mi};">`
             ).join('');
             const memberNames = g.members.map(m => m.name).join(' · ');
 
             body.insertAdjacentHTML('beforeend', `<tr>
-                <td class="col-num">${gi + 1}</td>
+                <td class="col-num">${i + 1}</td>
                 <td class="col-name"><div class="col-name-inner"><div style="display:flex;align-items:center;flex-shrink:0;">${avatarStack}</div><span>${g.name}</span></div></td>
                 <td class="col-position"></td>
                 <td class="col-dept">${memberNames}</td>
                 <td class="col-score">${g.score}</td>
             </tr>`);
-        });
+        }
 
-        document.getElementById('groupTableFooterInfo').textContent = `Всего команд: ${groups.length}`;
+        document.getElementById('groupTableFooterInfo').textContent = `Показано ${total ? start + 1 : 0}–${end} из ${total}`;
+        renderGroupPagination(totalPages);
+    }
+
+    function renderGroupPagination(totalPages) {
+        const pg = document.getElementById('groupTablePagination');
+        pg.innerHTML = '';
+
+        const prev = mkNavBtn('left', groupTablePage === 1);
+        prev.addEventListener('click', () => { if (groupTablePage > 1) { groupTablePage--; drawGroupTable(); } });
+        pg.appendChild(prev);
+
+        const range = 2;
+        let pStart = Math.max(1, groupTablePage - range);
+        let pEnd = Math.min(totalPages, groupTablePage + range);
+
+        if (pStart > 1) {
+            pg.appendChild(mkGroupPageBtn(1));
+            if (pStart > 2) pg.appendChild(mkDots());
+        }
+        for (let p = pStart; p <= pEnd; p++) pg.appendChild(mkGroupPageBtn(p));
+        if (pEnd < totalPages) {
+            if (pEnd < totalPages - 1) pg.appendChild(mkDots());
+            pg.appendChild(mkGroupPageBtn(totalPages));
+        }
+
+        const next = mkNavBtn('right', groupTablePage === totalPages);
+        next.addEventListener('click', () => { if (groupTablePage < totalPages) { groupTablePage++; drawGroupTable(); } });
+        pg.appendChild(next);
+    }
+
+    function mkGroupPageBtn(p) {
+        const b = document.createElement('button');
+        b.className = 'pagination-btn' + (p === groupTablePage ? ' active' : '');
+        b.textContent = p;
+        b.addEventListener('click', () => { groupTablePage = p; drawGroupTable(); });
+        return b;
     }
 
 
