@@ -10,17 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const MONTH_NAMES = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-    const ACTIVE_MONTHS = [0, 1, 2, 3]; // Months available (0=Jan, 3=Apr)
-    const CURRENT_MONTH = 3; // Default selected (April)
+    const ACTIVE_MONTHS = [0, 1, 2, 3];
+    const CURRENT_MONTH = 3;
 
     /* ──────────────────────────────────────────────────────────
        CONFIG: Nomination titles, metrics, icons
        ────────────────────────────────────────────────────────── */
-    const NOM_TITLES = {
-        commercial: ['Среди сотрудников', 'Среди директоров', 'Среди сотрудников', 'Среди директоров'],
-        security:   ['Лучший аналитик рисков', 'Предотвращение потерь', 'Скорость реагирования', 'Качество отчётности']
-    };
-
     const NOM_METRICS = {
         commercial: [
             'Процент выполнения личного плана от 75%',
@@ -28,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'Личный объём продаж накопительным итогом',
             'Объём продаж подразделения накопительным итогом, мин. план из расчёта коэфф. штата ≥ 3'
         ],
-        security: ['Кол-во выявленных рисков', 'Сумма предотвращённых потерь', 'Среднее время реагирования', 'Оценка качества отчётов']
+        security: ['Кол-во выявленных рисков', 'Сумма предотвращённых потерь']
     };
 
     const NOM_GROUPS = {
@@ -167,6 +162,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const data = monthData[boardTab];
+
+        // If no nominees at all, show empty
+        if (!data.length || data.every(c => !c.nominees || !c.nominees.length)) {
+            container.innerHTML = '<div class="empty-state"><i class="far fa-folder-open"></i><p>Нет данных за этот месяц</p></div>';
+            return;
+        }
+
         const metrics = NOM_METRICS[boardTab] || [];
         const placeNames = ['1 место', '2 место', '3 место'];
         const groups = NOM_GROUPS[boardTab];
@@ -185,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.insertAdjacentHTML('beforeend', section);
             });
         } else {
+            // Security or other — no grouping
             const icon = boardTab === 'security'
                 ? 'https://i.ibb.co/WJR5CS5/Frame-2131331990.png'
                 : '';
@@ -247,8 +250,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateRegVis() {
         const show = boardTab === 'commercial';
-        document.getElementById('regionsTitle').style.display = show ? '' : 'none';
-        document.getElementById('regionsGrid').style.display = show ? '' : 'none';
+        const monthData = MONTH_DATA[selectedMonth];
+        const hasRegions = monthData && monthData.regions && monthData.regions.length > 0;
+        document.getElementById('regionsTitle').style.display = (show && hasRegions) ? '' : 'none';
+        document.getElementById('regionsGrid').style.display = (show && hasRegions) ? '' : 'none';
     }
 
 
@@ -261,7 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tableSortCol = null;
         tableSortDir = 1;
 
-        // Wire sort icons
         document.querySelectorAll('#ratingTable thead .sort-icon').forEach(icon => {
             const th = icon.closest('th');
             if (th.classList.contains('col-name')) icon.dataset.col = 'name';
@@ -282,7 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Wire page size
         const ps = document.getElementById('pageSizeSelect');
         if (ps && !ps._wired) {
             ps._wired = true;
@@ -387,7 +390,6 @@ document.addEventListener('DOMContentLoaded', () => {
         groupTableData = OVERALL_GROUPS[selectedMonth] || OVERALL_GROUPS[CURRENT_MONTH] || [];
         groupTablePage = 1;
 
-        // Wire page size
         const ps = document.getElementById('groupPageSizeSelect');
         if (ps && !ps._wired) {
             ps._wired = true;
@@ -482,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ══════════════════════════════════════════════════════════
-       ABOUT CONTEST
+       ABOUT CONTEST — segmented tabs
        ══════════════════════════════════════════════════════════ */
     const aboutContestContent = [
         `<h3>Стартует главный конкурс года!</h3>
@@ -517,12 +519,16 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     window.switchAboutTab = function(idx) {
-        document.querySelectorAll('.about-contest-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+        // Update segmented toggle buttons
+        document.querySelectorAll('#aboutContestToggle .sub-toggle-btn').forEach((b, i) => {
+            b.classList.toggle('active', i === idx);
+        });
         document.getElementById('aboutContestBody').innerHTML = aboutContestContent[idx];
     };
 
     switchAboutTab(0);
 
+    // Close modals on overlay click
     document.getElementById('aboutContestModal').addEventListener('click', e => {
         if (e.target === document.getElementById('aboutContestModal')) closeModal('aboutContestModal');
     });
@@ -573,13 +579,22 @@ function showToast(text) {
     setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-/* ── PARTICIPATE MODAL ─────────────────────────────────────── */
+/* ── PARTICIPATE MODAL — segmented tab switching ────────────── */
 function switchParticipateTab(mode) {
     document.querySelectorAll('#participateToggle .sub-toggle-btn').forEach(b => {
         b.classList.toggle('active', b.dataset.mode === mode);
     });
     document.getElementById('participateIndividual').style.display = mode === 'individual' ? '' : 'none';
     document.getElementById('participateGroup').style.display = mode === 'group' ? '' : 'none';
+}
+
+/* ── CHALLENGE DETAIL MODAL — segmented tab switching ──────── */
+function switchChallengeTab(mode) {
+    document.querySelectorAll('#challengeToggle .sub-toggle-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.challenge === mode);
+    });
+    document.getElementById('challengeIndividualContent').style.display = mode === 'individual' ? '' : 'none';
+    document.getElementById('challengeGroupContent').style.display = mode === 'group' ? '' : 'none';
 }
 
 let groupMemberCount = 3;
@@ -619,7 +634,6 @@ function submitIndividual() {
 
     document.getElementById('individualSuccessBanner').classList.add('show');
 
-    // Reset form
     document.getElementById('indivName').value = '';
     document.getElementById('indivPosition').value = '';
     document.getElementById('indivDept').value = '';
@@ -663,8 +677,6 @@ function submitGroup() {
 }
 
 function saveRegistration(entry) {
-    // Save to localStorage as a simple persistent store
-    // In production, replace with API call to Bitrix
     const KEY = 'reso_registrations';
     let regs = [];
     try { regs = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) {}
