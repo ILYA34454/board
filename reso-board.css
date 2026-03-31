@@ -197,17 +197,15 @@ body {
 .banner-content {
     position: relative;
     z-index: 2;
-    padding: var(--sp-10) var(--sp-10) var(--sp-10) var(--sp-8);
+    padding: var(--sp-10);
     color: var(--white);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     pointer-events: none;
-}
-
-.breadcrumbs {
-    font-size: 14px;
-    opacity: 0.7;
-    margin-bottom: 72px;
+    height: 100%;
 }
 
 .banner h1 {
@@ -240,7 +238,7 @@ body {
     gap: var(--sp-2);
     font-weight: 500;
     font-family: var(--font);
-    align-self: flex-start;
+    align-self: center;
     pointer-events: auto;
 }
 
@@ -862,23 +860,28 @@ body {
     color: var(--white);
     position: relative;
     overflow: hidden;
-    height: 180px;
+    min-height: 180px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-6);
+}
+
+.challenge-intro-text {
+    position: relative;
+    z-index: 2;
+    flex: 1;
 }
 
 .challenge-intro::before { display: none; }
 .challenge-intro::after { display: none; }
 
 .challenge-intro-img {
-    position: absolute;
-    right: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 160px;
+    height: 140px;
     pointer-events: none;
     z-index: 1;
+    flex-shrink: 0;
+    object-fit: contain;
 }
 
 .challenge-intro h2 {
@@ -947,7 +950,7 @@ body {
     transition: all 0.2s;
 }
 
-.challenge-detail-btn:hover { background: var(--neutral-100); }
+.challenge-detail-btn:hover { background: rgba(255,255,255,0.25); }
 
 .challenge-cards-row {
     display: grid;
@@ -1202,37 +1205,6 @@ body {
 
 .about-contest-header { padding: var(--sp-8) 32px 0 32px; }
 .about-contest-header .modal-title { line-height: 130%; }
-
-.about-contest-tabs {
-    display: flex;
-    gap: var(--sp-8);
-    border-bottom: 1px solid var(--border-default);
-    padding: 0 32px;
-    margin-top: var(--sp-4);
-}
-
-.about-contest-tab {
-    padding: 0 0 var(--sp-3) 0;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: all 0.2s ease;
-    background: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    font-family: var(--font);
-}
-
-.about-contest-tab:hover { color: var(--text-primary); }
-
-.about-contest-tab.active {
-    color: var(--green-primary);
-    border-bottom-color: var(--green-primary);
-}
 
 .about-contest-body {
     padding: var(--sp-8) 32px 32px 32px;
