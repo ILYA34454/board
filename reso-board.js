@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const MONTH_NAMES = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
-    const ACTIVE_MONTHS = [0, 1, 2];
-    const CURRENT_MONTH = 2;
+    const ACTIVE_MONTHS = [0, 1, 2, 3];
+    const CURRENT_MONTH = 3;
 
     const NOM_METRICS = {
         commercial: [
