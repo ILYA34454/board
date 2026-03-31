@@ -197,13 +197,11 @@ body {
 .banner-content {
     position: relative;
     z-index: 2;
-    padding: var(--sp-10);
+    padding: var(--sp-10) var(--sp-10) var(--sp-10) var(--sp-8);
     color: var(--white);
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    text-align: center;
     pointer-events: none;
     height: 100%;
 }
@@ -238,7 +236,7 @@ body {
     gap: var(--sp-2);
     font-weight: 500;
     font-family: var(--font);
-    align-self: center;
+    align-self: flex-start;
     pointer-events: auto;
 }
 
@@ -857,32 +855,23 @@ body {
     padding: var(--sp-8) var(--sp-10);
     margin-bottom: var(--sp-8);
     background: var(--green-primary);
+    background-image: url('https://i.ibb.co/sdD6S7zZ/image.png');
+    background-size: auto 160px;
+    background-position: right 40px center;
+    background-repeat: no-repeat;
     color: var(--white);
     position: relative;
     overflow: hidden;
     min-height: 180px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--sp-6);
-}
-
-.challenge-intro-text {
-    position: relative;
-    z-index: 2;
-    flex: 1;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .challenge-intro::before { display: none; }
 .challenge-intro::after { display: none; }
 
-.challenge-intro-img {
-    height: 140px;
-    pointer-events: none;
-    z-index: 1;
-    flex-shrink: 0;
-    object-fit: contain;
-}
+/* challenge image is now CSS background */
 
 .challenge-intro h2 {
     font-size: 24px;
