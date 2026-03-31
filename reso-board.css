@@ -181,6 +181,9 @@ body {
     overflow: hidden;
     height: 316px;
     background: linear-gradient(135deg, var(--green-darker) 0%, var(--green-primary) 50%, #0a6344 100%);
+    background-image: url('https://i.ibb.co/6cwN8Tdp/Banner-1.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .banner::before {
@@ -715,12 +718,19 @@ body {
 
 .rating-table tbody tr:last-child td { border-bottom: none; }
 
-/* UNIFIED COLUMN WIDTHS — fixed px, table-layout:fixed enforces them */
-.rating-table .col-num        { width: 48px; color: var(--text-secondary); text-align: left; }
-.rating-table .col-name       { width: 318px; font-weight: 500; }
-.rating-table .col-position   { width: 318px; }
-.rating-table .col-dept       { width: 318px; }
-.rating-table .col-score      { width: 318px; text-align: right; font-weight: 500; padding-right: var(--sp-8); }
+/* INDIVIDUAL TABLE — column widths */
+.individual-table .col-num        { width: 48px; color: var(--text-secondary); text-align: left; }
+.individual-table .col-name       { width: 280px; font-weight: 500; }
+.individual-table .col-position   { width: 260px; }
+.individual-table .col-dept       { width: 320px; }
+.individual-table .col-score      { width: 120px; text-align: right; font-weight: 500; padding-right: var(--sp-8); }
+
+/* GROUP TABLE — column widths */
+.group-table .col-num        { width: 48px; color: var(--text-secondary); text-align: left; }
+.group-table .col-name       { width: 300px; font-weight: 500; }
+.group-table .col-position   { width: 0; padding: 0; overflow: hidden; }
+.group-table .col-dept       { width: 480px; }
+.group-table .col-score      { width: 120px; text-align: right; font-weight: 500; padding-right: var(--sp-8); }
 
 /* Name cell inner layout */
 .rating-table .col-name-inner {
