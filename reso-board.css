@@ -528,7 +528,7 @@ body {
     font-size: 14px;
     line-height: var(--leading);
     font-weight: 500;
-    margin-bottom: 3px;
+    margin-bottom: 6px;
 }
 
 .dept {
@@ -541,7 +541,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: var(--sp-1);
+    gap: 6px;
     white-space: nowrap;
     flex-shrink: 0;
 }
@@ -1171,7 +1171,7 @@ body {
     position: absolute;
     top: 16px;
     right: 16px;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 300;
     cursor: pointer;
     color: var(--neutral-400);
@@ -1179,11 +1179,16 @@ body {
     border: none;
     transition: color var(--ease-default);
     line-height: 1;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-close:hover { color: var(--text-primary); }
 .modal-title { font-size: 20px; font-weight: 600; margin-bottom: var(--sp-2); line-height: 140%; }
-.modal-text { font-size: 14px; line-height: 140%; color: var(--text-secondary); margin-bottom: var(--sp-5); }
+.modal-text { font-size: 14px; line-height: 140%; color: var(--text-primary); margin-bottom: var(--sp-5); }
 .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
 
 
@@ -1196,7 +1201,7 @@ body {
     padding: 0;
 }
 
-.about-contest-header { padding: var(--sp-8) 32px 0 32px; }
+.about-contest-header { padding: var(--sp-8) 32px 0 32px; margin-bottom: var(--sp-4); }
 .about-contest-header .modal-title { line-height: 130%; }
 
 .about-contest-body {
@@ -1285,6 +1290,48 @@ body {
 }
 
 .btn-add-member:hover { background: var(--green-border); }
+
+
+/* ── TABLE SEARCH FILTERS ──────────────────────────────────── */
+.table-search-row {
+    display: flex;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-4);
+}
+
+.table-search-field {
+    position: relative;
+    flex: 1;
+    max-width: 320px;
+}
+
+.table-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--neutral-400);
+    pointer-events: none;
+}
+
+.table-search-input {
+    width: 100%;
+    height: 44px;
+    padding: 0 var(--sp-4) 0 38px;
+    border: 1px solid var(--neutral-200);
+    border-radius: var(--radius-lg);
+    font-family: var(--font);
+    font-size: 14px;
+    color: var(--text-primary);
+    background: var(--white);
+    transition: border-color var(--ease-default);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.table-search-input::placeholder { color: var(--text-placeholder); }
+.table-search-input:focus { border-color: var(--green-primary); }
 
 
 /* ── MISC ──────────────────────────────────────────────────── */
