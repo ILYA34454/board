@@ -44,6 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let groupTablePage = 1;
     let groupTablePageSize = 10;
 
+    let searchName = '';
+    let groupSearchName = '';
+
 
     /* ══════ TABS ══════ */
     const tabsWrapper = document.getElementById('tabsWrapper');
@@ -274,11 +277,32 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        /* Wire search input */
+        const sn = document.getElementById('searchNameInput');
+        if (sn && !sn._wired) {
+            sn._wired = true;
+            sn.addEventListener('input', function() {
+                searchName = this.value.trim();
+                tablePage = 1;
+                drawTable();
+            });
+        }
+        /* Reset search on month change */
+        searchName = '';
+        if (sn) sn.value = '';
+
         drawTable();
     }
 
     function drawTable() {
         let data = [...tableData];
+
+        /* Search filter */
+        if (searchName) {
+            const q = searchName.toLowerCase();
+            data = data.filter(p => p.name.toLowerCase().includes(q) || p.dept.toLowerCase().includes(q));
+        }
+
         if (tableSortCol) {
             data.sort((a, b) => {
                 let va, vb;
@@ -378,11 +402,31 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        /* Wire group search */
+        const gsn = document.getElementById('groupSearchNameInput');
+        if (gsn && !gsn._wired) {
+            gsn._wired = true;
+            gsn.addEventListener('input', function() {
+                groupSearchName = this.value.trim();
+                groupTablePage = 1;
+                drawGroupTable();
+            });
+        }
+        groupSearchName = '';
+        if (gsn) gsn.value = '';
+
         drawGroupTable();
     }
 
     function drawGroupTable() {
-        const data = [...groupTableData];
+        let data = [...groupTableData];
+
+        /* Search filter */
+        if (groupSearchName) {
+            const q = groupSearchName.toLowerCase();
+            data = data.filter(g => g.name.toLowerCase().includes(q) || g.members.some(m => m.name.toLowerCase().includes(q)));
+        }
+
         const total = data.length;
         const totalPages = Math.max(1, Math.ceil(total / groupTablePageSize));
         if (groupTablePage > totalPages) groupTablePage = totalPages;
@@ -600,10 +644,32 @@ function submitGroup() {
 }
 
 function saveRegistration(entry) {
-    const KEY = 'reso_registrations';
-    let regs = [];
-    try { regs = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) {}
-    regs.push(entry);
-    localStorage.setItem(KEY, JSON.stringify(regs));
-    console.log('Registration saved:', entry);
+    /* Compose mailto with registration data */
+    const RECIPIENT = 'KapashinI@resoleasing.com';
+    let subject, body;
+
+    if (entry.type === 'individual') {
+        subject = encodeURIComponent('Заявка на челлендж — ' + entry.name);
+        body = encodeURIComponent(
+            'Индивидуальная заявка на челлендж\n\n' +
+            'ФИО: ' + entry.name + '\n' +
+            'Должность: ' + entry.position + '\n' +
+            'Департамент: ' + entry.dept + '\n' +
+            (entry.link ? 'Ссылка на материал: ' + entry.link + '\n' : '') +
+            '\nДата: ' + new Date().toLocaleString('ru-RU')
+        );
+    } else {
+        const membersList = entry.members.map((m, i) => (i + 1) + '. ' + m.name + ' — ' + m.dept).join('\n');
+        subject = encodeURIComponent('Командная заявка — ' + entry.teamName);
+        body = encodeURIComponent(
+            'Командная заявка на челлендж\n\n' +
+            'Команда: ' + entry.teamName + '\n\n' +
+            'Участники:\n' + membersList + '\n' +
+            (entry.link ? '\nСсылка на материал: ' + entry.link + '\n' : '') +
+            '\nДата: ' + new Date().toLocaleString('ru-RU')
+        );
+    }
+
+    window.open('mailto:' + RECIPIENT + '?subject=' + subject + '&body=' + body, '_blank');
+    console.log('Registration mailto opened:', entry);
 }
